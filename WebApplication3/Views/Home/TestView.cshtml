@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+
+
+
+<style>
+    /* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
+import "utils";
+
+.peer-eval- {
+  &block {
+    include: flex-column;
+    background-color: rgba(255, 255, 255, 0.647);
+  }
+  &block.layout {
+    position: relative;
+    min-height: 1024px;
+    flex-shrink: 0;
+  }
+}
+
+</style>
+
+
+
+<script>
+    /* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
+    import React from 'react';
+    import cn from 'classnames';
+
+    import styles from './PeerEval.module.scss';
+
+    export default function PeerEval(props) {
+        return (
+            <div className={`peer-eval ${cn(styles.block, styles.block_layout)}`}>
+      /*This group structure is not ready for flow layout, please resolve the 🐞
+                structure bug in pxCode editor.*/
+            </div>
+        );
+    }
+
+    PeerEval.inStorybook = true;
+
+</script>
+<html>
+<!--  This source code is exported from pxCode, you can get more document from https://www.pxcode.io  -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="/css/PeerEval.css" />
+
+    <script type="text/javascript"
+            src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript"
+            src="https://unpkg.com/headroom.js@0.12.0/dist/headroom.min.js"></script>
+</head>
+
+<body style="display: flex; flex-direction: column">
+    <div class="peer-eval peer-eval-block layout">
+        /*This group structure is not ready for flow layout, please resolve the 🐞
+        structure bug in pxCode editor.*/
+    </div>
+    <script type="text/javascript">
+      AOS.init();
+    </script>
+</body>
+</html>

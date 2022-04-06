@@ -1,0 +1,413 @@
+﻿@model StudentGroupCreationViewModel
+@{
+    ViewBag.Title = "CreateStudentGroups";
+}
+
+<h2>CreateStudentGroups</h2>
+
+
+
+@using (Html.BeginForm("CreateStudentGroups", "Home", FormMethod.Post, new { id = "createstudentgroupForm", enctype = "multipart/form-data" }))
+{
+    <fieldset>
+    </fieldset>
+    <style>
+        body {
+            background: url(https://i.imgur.com/VtXEfl0.png);
+            background-size: cover;
+        }
+
+
+        /**Rectangle 1 */
+
+
+
+        .smulogo {
+            position: absolute;
+            width: 350px;
+            height: 125px;
+            left: 0px;
+            top: 0px;
+            background: url(https://i.imgur.com/4IpDWG0.png);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        #rect1 {
+            position: absolute;
+            width: 2240px;
+            height: 125px;
+            left: 350px;
+            top: 0px;
+            background: #151C55;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        #notice {
+            background: #151C55;
+            border: 1px solid #8A704C;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .evalConfirm -_body {
+            margin: -70px 0 30px;
+        }
+
+
+        .evalConfirm ._body ._box {
+            margin: auto;
+            max-width: 80%;
+            padding: 50px;
+            background: white;
+            border-radius: 3px;
+            box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+            -moz-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+            -webkit-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+        }
+
+        #linker {
+            border: 1px solid #8A704C;
+            background: #8A704C;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+            -webkit-border-radius: 4px;
+        }
+
+        #selectopts {
+            z-index: 1;
+            background: #151C55;
+            margin-left: 500px;
+            position: absolute;
+            width: 195px;
+            height: 35px;
+            left: 1245px;
+            top: 48px;
+        }
+
+        #dropdownMenuButton {
+            background: #151C55;
+        }
+
+        #rect2 {
+            position: center;
+            background: #DCBDA0;
+            border: 1px solid #8A704C;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+
+        #hublogo {
+            position: absolute;
+            width: 807px;
+            height: 65px;
+            left: 394px;
+            top: 40px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 52px;
+            color: #FFFFFF;
+        }
+
+
+
+        #instruct1 {
+            position: absolute;
+            width: 470px;
+            height: 444px;
+            left: 550px;
+            top: 150px;
+        }
+    </style>
+
+
+
+
+
+    <html>
+    <head>
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        "
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-81J8R69BHH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-81J8R69BHH');
+        </script>
+        <title> Professor Homepage </title>
+
+
+
+        
+        <script>
+            //find way to hide the table on input, then display it when a course is selected
+
+
+            /*
+             *
+            $("#stuTable input[type='checkbox']").change(function () {
+                var count = $("input[type='radio']:checkbox").length;
+
+                if (count > 3) {
+                    $(this).prop('checked', false);
+                    alert("You cannot add more than 3");
+                }
+            });
+        */
+
+
+            var counter = 0;
+            function stuSel() {
+                this.disabled = true;
+                alert('Student selected.');
+                counter++;
+                alert(counter);
+
+
+                if (counter == 3) 
+                {
+                    $('.stusel').each(function ()
+                    {
+                        this.disabled = true;
+                    })
+                }
+            };
+
+            var stuId = "";
+            function inputPopulator()
+            {
+                var stusearcher = document.getElementsByClassName('stusel');
+                for (var i = 0; i < stusearcher.length; i++)
+                {
+
+                    stusearcher(i).value = stuId;
+                };
+            };
+
+
+
+            //iterate counter, then find method to loop through buttons and disable buttons
+
+            $(document).on('change', '#profCourses', function () {
+                getOption();
+                const limit = 5
+                $.ajax({
+                                    type: 'GET',
+                                    url: '@Url.Action("GetTableInfo", "Home")',
+                                    datatype: JSON,
+                                    data: { 'input': $("#profCourses").val() },
+                                    success: function (data) {
+                                        $('#stuTable tbody').empty();
+
+                                        $.each(data, function (i, item) {
+
+                                            //create incrementing id's????
+
+                                            var rows = "<tr>"
+                                                + "<td class='text-center'>" + item.StudentFirstName + " " + item.StudentLastName  + "</td>"
+                                                + "<td class='text-center'>" +  '<input class="stusel" type="checkbox" onclick="stuSel();" id="stuId'+  item.StudentID  +'"/>' + "</td>"
+                                    + "</tr>";
+                                            $('#stuTable tbody').append(rows);
+                                        });
+                                    },
+                                    error: function (data) { }
+
+
+
+                                    //need to create some kind of javascript function to prevent the user from selecting more than three radio buttons
+
+                });
+                inputPopulator();
+                document.getElementById('tableHolder').style.visibility = "visible"; //make datatable visible at this point as it now has data
+
+            });
+
+
+            /**
+             *
+            $('input[type=checkbox]').on('change', function (e) {
+                if ($('input[type=checkbox]:checked').length > 3) {
+                    $(this).prop('checked', false);
+                    alert("allowed only 3");
+                }
+            });
+            */
+
+
+
+
+            function getOption() {
+                selectElement = document.querySelector('#profCourses');
+                hiddenthing = selectElement.value;
+                document.querySelector('.hiddenthing').value = hiddenthing;
+                alert("Course selected. ");
+                $('testVar').val(hiddenthing);
+                $("#profCourses").prop('disabled', true);
+            };
+
+
+
+
+        </script>
+
+
+
+    </head>
+
+    <body>
+
+        <script>
+
+
+        </script>
+        <div class="dropdown" id="selectopts">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login Options
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="@Url.Action("LogOutProf", "Home")">Logout</a>
+            </div>
+        </div>
+
+        <div class="evalConfirm">
+            <div class="navbar-header">
+                <div class="rect" id="rect1"> </div>
+                <div class="smulogo"> </div>
+                <h2 id="hublogo">  Create Student Groups </h2>
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <section class="h-100 gradient-form ">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black" id="rect2">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="card-body p-md-5 mx-md-4">
+
+
+
+                                        <div class="text-center">
+
+                                        </div>
+
+                                        <form>
+
+                                            <div class="form-outline mb-4">
+                                                <div class="container" id="ddlHolder">
+                                                    @Html.LabelFor(m => m.Courses, new { @style = "width: 56px; height: 35px; left: 315px; top: 477px; font-style: normal; font-weight: 700; font-size: 15px; line-height: 35px; /* identical to box height */ text - align: center; color: #000000;" })
+                                                    @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "CourseID", "CourseTitle"), new { @required = true, @id = "profCourses", @class = "form-control" })
+                                                    @Html.Hidden("testvar", 0)
+                                                    <input type="hidden" class="hiddenthing" id="hiddenInfo" name="hiddenInfo" />
+                                                    <br />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-outline mb-4">
+                                                <label for="buttonHolder" style=" width: 56px; height: 35px; left: 315px; top: 477px; font-style: normal; font-weight: 700; font-size: 15px; line-height: 35px; /* identical to box height */ text-align: center; color: #000000; "> Sort: </label>
+                                                <br />
+                                                <div class="container" id="buttonHolder">
+                                                    <button type="button" id="sortRandom" name="sortRandom" title="shitty" style="position: center; width: 150px; height: 29px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 16px; line-height: 22px; text-align: center;"> Random </button>
+
+                                                    <br />
+                                                    <br />
+                                                    <button type="button" id="sortABC" name="sortABC" style="position: center; width: 150px; height: 29px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 16px; line-height: 22px; text-align: center;"> Alphabetical </button>
+                                                </div>
+
+                                            </div>
+
+                                            <br />
+                                            <br />
+                                            <br />
+
+                                            <div class="text-center pt-1 mb-5 pb-1">
+                                                <input id="groupSubmitSubmit" name="submit" type="submit" value="Create Group" style=" position: center; width: 250px; height: 33px; left: 308px; top: 715px; font-style: normal; font-weight: 700 ; font-size: 18px; line-height: 22px; text-align: center; background: #151C55; color: antiquewhite;">
+
+                                            </div>
+
+
+
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+
+                                    <div class="container" id="tableHolder">
+                                        <table id="stuTable" class="table table-striped table-responsive-md table-bordered table-hover table-dark">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center"> Student Name </th>
+                                                    <th class="text-center"> Selected? </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="font-style: normal; font-weight: 700; font-size: 15px; line-height: 35px;"></tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- hide the table the moment it is rendered: looks unappealing w/o content-->
+                                    <script>
+                                        document.getElementById('tableHolder').style.visibility = "hidden";
+                                    </script>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <!--
+
+
+
+                !!! Wednesday !!!
+
+                Table created via ajax. Now trying to limit selection of people to three per row.
+                After this, will handle scraping info from table to DB on submit. 
+                Then will further hone logic and refine database side of things.
+                Then handle the eval table insert. 
+                Then handle individual removal: remove the student ids selected from the list. Doesn't have to be done db side but just
+                on the app itself. Maybe a clever scenario/property can be added to the model to make this easier. 
+                Create confirmation page: Easiest
+            -->
+
+
+
+
+
+
+        </section>
+
+    </body>
+
+
+</html>
+<script type="text/javascript">
+
+</script>
+}

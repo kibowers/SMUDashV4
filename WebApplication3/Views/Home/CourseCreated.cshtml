@@ -1,0 +1,248 @@
+﻿@{
+    ViewBag.Title = "CourseCreated";
+}
+
+    <fieldset>
+    </fieldset>
+    <style>
+        body {
+            background: url(https://i.imgur.com/VtXEfl0.png);
+            background-size: cover;
+        }
+
+
+        /**Rectangle 1 */
+
+
+
+        .smulogo {
+            position: absolute;
+            width: 350px;
+            height: 125px;
+            left: 0px;
+            top: 0px;
+            background: url(https://i.imgur.com/4IpDWG0.png);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        #rect1 {
+            position: absolute;
+            width: 2240px;
+            height: 125px;
+            left: 350px;
+            top: 0px;
+            background: #151C55;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        #notice {
+            background: #151C55;
+            border: 1px solid #8A704C;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .evalConfirm -_body {
+            margin: -70px 0 30px;
+        }
+
+
+        .evalConfirm ._body ._box {
+            margin: auto;
+            max-width: 80%;
+            padding: 50px;
+            background: white;
+            border-radius: 3px;
+            box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+            -moz-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+            -webkit-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+        }
+
+        #linker {
+            border: 1px solid #8A704C;
+            background: #8A704C;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+            -webkit-border-radius: 4px;
+        }
+
+        #selectopts {
+            z-index: 1;
+            background: #151C55;
+            margin-left: 500px;
+            position: absolute;
+            width: 195px;
+            height: 35px;
+            left: 1245px;
+            top: 48px;
+        }
+
+        #dropdownMenuButton {
+            background: #151C55;
+        }
+
+        #rect2 {
+            position: center;
+            width: 1050px;
+            height: 768px;
+            left: 244px;
+            top: 194px;
+            background: #DCBDA0;
+            border: 1px solid #8A704C;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+
+        #hublogo {
+            position: absolute;
+            width: 807px;
+            height: 65px;
+            left: 394px;
+            top: 40px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 52px;
+            color: #FFFFFF;
+        }
+
+
+
+        #instruct1 {
+            position: absolute;
+            width: 470px;
+            height: 444px;
+            left: 550px;
+            top: 150px;
+        }
+    </style>
+
+
+    <html>
+    <head>
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        "
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-81J8R69BHH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-81J8R69BHH');
+        </script>
+        <title> Professor Homepage </title>
+
+
+    </head>
+
+    <body>
+
+        <script>
+
+
+        </script>
+        <div class="dropdown" id="selectopts">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login Options
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="@Url.Action("LogOutProf", "Home")">Logout</a>
+            </div>
+        </div>
+
+        <div class="evalConfirm">
+            <div class="navbar-header">
+                <div class="rect" id="rect1"> </div>
+                <div class="smulogo"> </div>
+                <h2 id="hublogo">  Import Courses </h2>
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <section class="h-100 gradient-form ">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="rect" id="rect2">
+                                        <div class="card-body p-md-5 mx-md-4">
+                                                <div class="form-outline mb-4">
+
+
+                                                        <h1 style="  font-weight: 700; line-height: 24px; letter-spacing: 0.02em; " class="text-center active"> Your New Course: </h1>
+
+                                                        <br />
+                                                        <br />
+
+                                                        <p style=" font-style: normal; font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0.02em; " class="text-center active">
+
+
+                                                            Course Title: <strong>@Session["CreatedCourseTitle"] </strong>
+
+                                                            <br />
+                                                            <br />
+
+                                                          
+                                                            Course Code: <strong>@Session["CreatedCourseCode"] </strong>
+                                                            <br />
+                                                            <br />
+                                                            Course Year: <strong>@Session["CreatedCourseYear"] </strong>
+                                                            <br />
+                                                            <br />
+                                                            Course Term: <strong>@Session["CreatedCourseTerm"] </strong>
+                                                            <br />
+                                                            <br />
+                                                        </p>
+
+
+                                                        <p style=" font-style: normal; font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0.02em;" class="text-center active"> Return to the professor hub using the link below.  </p>
+                                                        <br />
+                                                        <br />
+                                                        <div class="text-center">
+                                                            <input id="linker" style="background: #151C55;" onclick="location.href='@Url.Action("ProfHub", "Home")'" type="submit" value="Return to Professor Dashboard  " />
+                                                        </div>
+
+
+                                                </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+        </section>
+
+    </body>
+</html>

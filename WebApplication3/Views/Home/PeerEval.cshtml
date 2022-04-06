@@ -1,0 +1,486 @@
+﻿@using Newtonsoft.Json
+@using System.ComponentModel.DataAnnotations
+@model SelectStudentCourseViewModel
+@{
+    ViewBag.Title = "PeerEval";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+}
+@using (Html.BeginForm("PeerEval", "Home", FormMethod.Post, new { id = "evalForm"}))
+{
+    <fieldset>
+        @Html.ValidationSummary(true)
+
+        @if (ViewBag.Message != null)
+        {
+            <div style="border: 3px solid red">
+                @ViewBag.Message()
+            </div>
+        }
+    </fieldset>
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-81J8R69BHH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-81J8R69BHH');
+        </script>
+        <style>
+            h3, h1, h2, input, h4, label, p, button, small {
+                font-family: 'Century Gothic';
+            }
+            p {
+                color: black;
+            }
+            .login-form-bottom-gradient {
+                background: linear-gradient(to bottom right, white, blue, gold);
+            }
+            .smulogo {
+                position: absolute;
+                width: 350px;
+                height: 125px;
+                left: 0px;
+                top: 0px;
+                background: url(https://i.imgur.com/4IpDWG0.png);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+            #rect1 {
+                position: absolute;
+                width: 2240px;
+                height: 125px;
+                left: 350px;
+                top: 0px;
+                background: #151C55;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+            .carousel-inner img {
+                width: 100%;
+                height: 100%;
+                margin-top: -20px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0px;
+            }
+            #demo {
+                position: absolute;
+                z-index: -1;
+                opacity: 0.75;
+                margin-top: -50px;
+                margin-right: -50px;
+                margin-left: -800px;
+                margin-bottom: 0px;
+            }
+            #selectopts {
+                z-index: 1;
+                background: #151C55;
+                margin-left: 1000px;
+            }
+            #dropdownMenuButton {
+                background: #151C55;
+            }
+        </style>
+
+        <title> Student Peer Evaluation </title>
+    </head>
+
+    <body>
+        <div class="dropdown" id="selectopts">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login Options
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="@Url.Action("LogOutStudent", "Home")">Logout</a>
+            </div>
+        </div>
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/-_Singapore_Management_University_School_of_Law_Armeninan_Street.jpg" alt="Image1" width="2560" height="1440">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Singapore_Management_University_SMU_IMG_9742.jpg" alt="Image2" width="2560" height="1440">
+                </div>
+            </div>
+        </div>
+        <div class="rect" id="rect1">
+        </div>
+        <div class="smulogo"> </div>
+        <div class="text-center">
+            <h1 class="display-4">SMU Student Peer Evaluation </h1>
+            <p> Hello @Session["StudentFirstName"]! Evaluations are mandatory and all fields must be completed. Please contact your professor if you have any questions or concerns. </p>
+        </div>
+        <br />
+        <br />
+        <br />
+        <section class="h-100 gradient-form ">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="card-body p-md-5 mx-md-4">
+                                        <form method="post">
+                                            @Html.AntiForgeryToken()
+                                            <div class="form-outline mb-4">
+                                                <div class="text-center">
+                                                </div>
+                                                <div class="form-outline mb-4" id="dropdowncontainer">
+                                                    <label for="studentCourses"> Course Selection </label>
+                                                    @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "CourseID", "CourseTitle"), new { @required = true, @id = "studentCourses", @class = "form-control" })
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label for="StudentGroupDropdown"> Group Members </label>
+                                                    @Html.DropDownList("test", Enumerable.Empty<SelectListItem>(), "Select Group Member", new { @required = true, @class = "form-control", @name = "test", @id = "test" })
+                                                    @Html.Hidden("testvar", 0)
+                                                    <input type="hidden" class="hiddenthing" id="hiddenInfo" name="hiddenInfo" />
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label for="CriticalThinkingProblemSolving_Score"> Critical Thinking and Problem Solving Ability </label>
+                                                    <input id="CriticalThinkingProblemSolving_Score"
+                                                           name="CriticalThinkingProblemSolving_Score"
+                                                           type="range"
+                                                           min="-1"
+                                                           max="4"
+                                                           step="1"
+                                                           oninput="document.getElementById('l1').innerHTML = this.value"
+                                                           value="-1"
+                                                           data-val="true"
+                                                           data-val-required="Valid Input Required"
+                                                           data-val-length-min="1"
+                                                           data-val-length-max="4" />
+                                                    <label id="l1" style="padding-left:20px"> </label>
+                                                    @Html.ValidationMessageFor(m => m.Evaluation.CriticalThinkingProblemSolving_Score)
+                                                    <label class="errmsg" id="e1" value="" style="padding-left: 20px; color:red;"></label>
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label for="InnovativeEntrepreneurialSkills_Score"> Innovative and Entreprenurial Skills </label>
+                                                    <input id="InnovativeEntrepreneurialSkills_Score" name="InnovativeEntrepreneurialSkills_Score" type="range" min="-1" max="4" step="1"
+                                                           oninput="document.getElementById('l2').innerHTML = this.value;" value="-1" />
+                                                    <label id="l2" style="padding-left:20px"> </label>
+                                                    <label class="errmsg" id="e2" value="" style="padding-left: 20px; color:red;"> </label>
+                                                    @Html.ValidationMessageFor(m => m.Evaluation.InnovativeEntrepreneurialSkills_Score)
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label for="CollaborationLeadership_Score"> Collaboration and Leadership </label>
+                                                    <input id="CollaborationLeadership_Score" name="CollaborationLeadership_Score" type="range" min="-1" max="4" step="1"
+                                                           oninput="document.getElementById('l3').innerHTML = this.value" value="-1" />
+                                                    <label id="l3" style="padding-left:20px"> </label>
+                                                    <label class="errmsg" value="" id="e3" style="padding-left: 20px; color:red;"> </label>
+                                                    @Html.ValidationMessageFor(m => m.Evaluation.CollaborationLeadership_Score)
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label for="Communication_Score"> Communication Score  </label>
+                                                    <input id="Communication_Score" type="range" name="Communication_Score" min="-1" max="4" step="1"
+                                                           oninput="document.getElementById('l4').innerHTML = this.value" value="-1" />
+                                                    <label id="l4" style="padding-left:20px"> </label>
+                                                    <label class="errmsg" value="" id="e4" style="padding-left: 20px; color:red;"> </label>
+                                                    @Html.ValidationMessageFor(m => m.Evaluation.Communication_Score)
+                                                </div>
+
+
+                                                <div class="form-outline mb-4">
+
+
+                                                    <label for="Knowledge_Score"> Knowledge Score  </label>
+                                                    <input id="Knowledge_Score" type="range" name="Knowledge_Score" min="-1" max="4" step="1"
+                                                           oninput="document.getElementById('l5').innerHTML = this.value" value="-1" />
+                                                    <label id="l5" style="padding-left:20px"> </label>
+                                                    <label class="errmsg" id="e5" value="" style="padding-left: 20px; color:red;"></label>
+
+                                                    @Html.ValidationMessageFor(m => m.Evaluation.Knowledge_Score)
+
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="form-outline mb-4">
+
+
+                                                <label for="Intercultural_Score"> Intercultural Score </label>
+                                                <input id="Intercultural_Score" type="range" name="Intercultural_Score" min="-1" max="4" list="tickmarks" step="1"
+                                                       oninput="document.getElementById('l6').innerHTML = this.value" value="-1" />
+                                                <label id="l6" style="padding-left:20px"> </label>
+                                                <label class="errmsg" value="" id="e6" style="padding-left: 20px; color:red;"> </label>
+
+                                                @Html.ValidationMessageFor(m => m.Evaluation.Intercultural_Score)
+
+
+
+                                            </div>
+                                            <div class="form-outline mb-4">
+
+
+                                                <label for="DevelopmentInAsia_Score"> Development in Asia Score </label>
+                                                <input id="DevelopmentInAsia_Score" type="range" name="DevelopmentInAsia_Score" min="-1" max="4" step="1"
+                                                       oninput="document.getElementById('l7').innerHTML = this.value" value="-1" />
+                                                <label id="l7" style="padding-left:20px"> </label>
+                                                <label class="errmsg" value="" id="e7" style="padding-left: 20px; color:red;"></label>
+
+                                                @Html.ValidationMessageFor(m => m.Evaluation.DevelopmentInAsia_Score)
+
+                                            </div>
+                                            <div class="form-outline mb-4">
+
+
+                                                <label for="EthicsSocialResponsibility_Score"> Ethics Social Responsibility Score </label>
+                                                <input id="EthicsSocialResponsibility_Score" name="EthicsSocialResponsibility_Score" type="range" min="-1" max="4" step="1"
+                                                       oninput="document.getElementById('l8').innerHTML = this.value" value="-1" />
+                                                <label id="l8" style="padding-left:20px"> </label>
+                                                <label class="errmsg" value="" id="e8" style="padding-left: 20px; color:red;"></label>
+
+                                                @Html.ValidationMessageFor(m => m.Evaluation.EthicsSocialResponsibility_Score)
+
+                                            </div>
+                                            <div class="form-outline mb-4">
+
+
+                                                <label for="ResiliencePositivity_Score"> Resiliency/Positivity Score </label>
+                                                <input id="ResiliencePositivity_Score" name="ResiliencePositivity_Score" type="range" min="-1" max="4" step="1"
+                                                       oninput="document.getElementById('l9').innerHTML = this.value" value="-1" />
+                                                <label id="l9" style="padding-left:20px"> </label>
+                                                <label class="errmsg" value="" id="e9" style="padding-left: 20px; color:red;"></label>
+
+                                                @Html.ValidationMessageFor(m => m.Evaluation.ResiliencePositivity_Score)
+
+                                            </div>
+                                            <div class="form-outline mb-4">
+
+
+                                                <label for="SelfDirectednessMetaLearning_Score"> Self Directedness Meta-learning Score </label>
+                                                <input id="SelfDirectednessMetaLearning_Score" name="SelfDirectednessMetaLearning_Score" type="range" min="-1" max="4" step="1"
+                                                       oninput="document.getElementById('l10').innerHTML = this.value" value="-1" />
+                                                <label id="l10" style="padding-left:20px"> </label>
+                                                <label class="errmsg" value="" id="e10" style="padding-left: 20px; color:red;"></label>
+
+
+
+                                            </div>
+
+
+                                            <div class="form-outline mb-4">
+                                                <input id="evalSubmit" name="submit" type="submit" value="Submit Evaluation">
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </section>
+        <script>
+            $(document).on('change', '#studentCourses', function () {
+                alert("Course selected.");
+                        var url = '@Url.Action("GetDropdownList", "Home")';
+                        var ports = $('#test');
+                    var id = $(this).val();
+                    console.log(id);
+
+                        $.getJSON(url, { input: id }, function (response) {
+                            ports.empty();
+                            $.each(response, function (index, item) {
+                                ports.append($('<option></option>').text(item.StudentFirstName + " " + item.StudentLastName).val(item.StudentID));
+                            });
+                        });
+
+                $("#studentCourses").prop('disabled', true);
+            });
+
+            function getOption() {
+                selectElement = document.querySelector('#test');
+                hiddenthing = selectElement.value;
+                document.querySelector('.hiddenthing').value = hiddenthing;
+                alert("Peer to review selected. ");
+                $('testVar').val(hiddenthing);
+                $("#test").prop('disabled', true);
+
+                alert(hiddenthing);
+            };
+
+            $(document).on('change', '#test', function () {
+
+                getOption();
+            });
+
+
+
+            $('#evalForm').on('submit', function (e) {
+
+
+                var CriticalThinkingProblemSolving_Score = document.getElementById("CriticalThinkingProblemSolving_Score").value;
+                var InnovativeEntrepreneurialSkills_Score = document.getElementById("InnovativeEntrepreneurialSkills_Score").value;
+                var CollaborationLeadership_Score = document.getElementById("CollaborationLeadership_Score").value;
+                var CriticalThinkingProblemSolving_Score = document.getElementById("CriticalThinkingProblemSolving_Score").value;
+                var Communication_Score = document.getElementById("Communication_Score").value;
+                var Intercultural_Score = document.getElementById("Intercultural_Score").value;
+                var EthicsSocialResponsibility_Score = document.getElementById("EthicsSocialResponsibility_Score").value;
+                var ResiliencePositivity_Score = document.getElementById("ResiliencePositivity_Score").value;
+                var SelfDirectednessMetaLearning_Score = document.getElementById("SelfDirectednessMetaLearning_Score").value;
+
+                var DevelopmentInAsia_Score = document.getElementById("DevelopmentInAsia_Score").value;
+
+
+
+
+
+                if (CriticalThinkingProblemSolving_Score != -1 || 0 || null) {
+
+                    return true;
+
+                }
+                else {
+                    document.getElementById('e1').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                    e.preventDefault();
+                }
+
+
+                if (InnovativeEntrepreneurialSkills_Score != -1 || 0 || null) {
+
+                    return true;
+
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e2').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (CollaborationLeadership_Score != -1 || 0 || null) {
+
+                    return true;
+
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e3').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (Communication_Score != -1 || 0 || null) {
+
+                    return true;
+
+
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e4').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (CriticalThinkingProblemSolving_Score != -1 || 0 || null) {
+
+                    return true;
+
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e5').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (Intercultural_Score != -1 || 0 || null) {
+
+                    return true;
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e6').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (DevelopmentInAsia_Score != -1 || 0 || null) {
+
+                    return true;
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e7').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (EthicsSocialResponsibility_Score != -1 || 0 || null) {
+
+                    return true;
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e8').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (ResiliencePositivity_Score != -1 || 0 || null) {
+
+                    return true;
+
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e9').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+                if (SelfDirectednessMetaLearning_Score != -1 || 0 || null) {
+
+                    return true;
+
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementById('e10').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+                }
+
+
+                return false;
+                alert("Errors are present in your evaluation submission.");
+
+            });
+
+        </script>
+
+    </body>
+
+
+</html>
+
+
+}
+
