@@ -11,7 +11,10 @@ namespace WebApplication3
     [Table("course")]
     public partial class course
     {
+        [Key]
 [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "Please assure your inputs have been selected.")]
+
         public int CourseID { get; set; }
 
         [StringLength(255)]
@@ -19,7 +22,8 @@ namespace WebApplication3
         public string CourseCode { get; set; }
 
         [StringLength(255)]
-        [Required]
+        [Required(ErrorMessage = "Please assure your inputs have been selected.")]
+
         public string CourseTitle { get; set; }
 
         [StringLength(255)]

@@ -11,6 +11,9 @@ namespace WebApplication3
     {
 
         public Course_Student CourseStudent { get; set; }
+
+
+        [Required(ErrorMessage = "Please assure your inputs have been selected.")]
         public List<course> Courses { get; set; }
         public IEnumerable<course> studentCourses { get; set; }
 

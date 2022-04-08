@@ -147,11 +147,15 @@
         <title> Professor Homepage </title>
 
 
+
+
+
     </head>
 
     <body>
 
         <script>
+
 
 
         </script>
@@ -225,8 +229,8 @@
 
 
                                                         <label for="courseYear"> Select Course Year </label>
-                                                        <input name="courseYear" required type="range" id="courseYear" min="2021" max="2023" oninput="document.getElementById('l1').innerHTML = this.value" />
-
+                                                        <input name="courseYear" required type="range" id="courseYear" oninput="document.getElementById('l1').innerHTML = this.value" />
+                                                        <!-- year auto update-->
                                                         <label id="l1" style="padding-left:20px"> </label>
                                                         <label class="errmsg" id="error3" style="padding-left: 20px; color:red;"></label>
 
@@ -288,6 +292,29 @@
         </section>
 
         <script>
+
+
+
+
+            //automatically set course year on load so as to futureproof application
+            $(window).on('load', function ()
+            {
+                        var currYear = new Date().getFullYear();
+                var nextYear = new Date().getFullYear() + 1;
+                var nextnextYear = new Date().getFullYear() + 2;
+                        var inputgrabber = document.getElementById('courseYear');
+                inputgrabber.setAttribute("min", currYear);
+                inputgrabber.setAttribute("max", nextnextYear);
+                        inputgrabber.setAttribute("value", currYear);
+
+
+
+                        inputgrabber.setAttribute("step", 1);
+
+                             document.getElementById('l1').innerHTML = inputgrabber.value;
+
+            });
+
             function getOption() {
                 selectElement = document.querySelector('#cTerm');
                 hiddenthing = selectElement.value;

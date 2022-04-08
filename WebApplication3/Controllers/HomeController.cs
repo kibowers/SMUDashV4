@@ -478,7 +478,17 @@ namespace WebApplication3.Controllers
 
 
                 db.scheduleEvals.Add(theEval);
+
+
+
+
+
                 db.SaveChanges();
+
+
+                /** go back and add more backend eval logic time permitting */
+
+
 
 
 
@@ -703,8 +713,9 @@ namespace WebApplication3.Controllers
                                     {
                                         EnrollmentID = default,
                                         CourseID = thingid,
-                                        StudentID = foundstu.StudentID
-
+                                        StudentID = foundstu.StudentID,
+                                        DashAssigned = false
+                 
                                     };
 
                                     db.Entry(newStu).State = System.Data.Entity.EntityState.Modified;
@@ -786,7 +797,6 @@ namespace WebApplication3.Controllers
                     }
                 }
             }
-            courselister.Insert(0, new course { CourseID = 0, CourseTitle = "Please select a course." });
             var viewModel = new StudentGroupCreationViewModel { Courses = courselister };
 
             return View(viewModel);
@@ -814,87 +824,329 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public ActionResult GetTableInfo(int input)
         {
-            /* List<Student_Grouper> stinkyFinder = new List<Student_Grouper>();
-            List<student> stuFinder = new List<student>();
-            List<SelectListItem> fine = new List<SelectListItem>();
-            List<grouper> grouplist = new List<grouper>();
-            var stuID = Convert.ToInt32(Session["StudentID"]);
-            List<int> studentIdcollector = new List<int>();
-            */
-            //attempt to retrieve the groupers objects with the same course IDs, this will give access
-            // to the group IDs which we can use to retrieve info from student grouper 
-            /*
-            var grouplister = db.groupers.Where(a => a.CourseID.Value.Equals(input)).ToList();
 
+            //session variable storing the course name upon selection. need this for confirmation screen. 
+            var courseStorer = db.courses.Where(a => a.CourseID.Equals(input)).FirstOrDefault();
 
-            //list for every group the student is in. We have group id's here. 
-            var yourGroups = db.Student_Grouper.Where(a => a.StudentID.Value.Equals(stuID)).ToList();
+            Session["CourseName"] = courseStorer.CourseTitle;
+            Session["CourseTerm"] = courseStorer.CourseTerm;
+            Session["CourseYear"] = courseStorer.CourseYear;
+            Session["CourseCode"] = courseStorer.CourseCode;
+            Session["CourseID"] = courseStorer.CourseID;
 
-
-            foreach (var groupObj in yourGroups)
-            {
-                var groupfinder = db.groupers.Where(a => a.GroupID == groupObj.GroupID).ToList();
-
-
-                foreach (var groupinfo in groupfinder)
-                {
-                    if (groupinfo.CourseID == input)
-                    {
-                        grouplist.Add(groupinfo);
-                    }
-                }
-            }
-            foreach (var groupa in grouplist)
-            {
-                var finder = db.Student_Grouper.Where(a => a.GroupID.Value.Equals(groupa.GroupID)).ToList();
-                foreach (var v in finder)
-                {
-                    studentIdcollector.Add((int)v.StudentID);
-                }
-            }
-
-            foreach (var stuid in studentIdcollector)
-            {
-                System.Diagnostics.Debug.WriteLine(stuid);
-
-                var stuSearcher = db.students.Where(a => a.StudentID.Equals(stuid)).FirstOrDefault();
-
-                if (stuSearcher != null)
-                {
-                    stuFinder.Add(stuSearcher);
-                }
-
-            }
-
-
-            return Json(stuFinder, JsonRequestBehavior.AllowGet);
-
-            */
 
 
             //going to course_student to retrieve the list of students who are taking the selected course
-            var courseLister = db.Course_Student.Where(a => a.CourseID.Equals(input)).ToList();
+            var courseLister = db.Course_Student.Where(a => a.CourseID == input).ToList();
+            var groupsearcha = db.groupers.Where(a => a.CourseID == input).ToList(); //list of groups for this course ID
 
+
+
+
+            List<Course_Student> holder = new List<Course_Student>();
+
+            foreach (var assignFinder in courseLister)
+            {
+                //var notAssigned = db.Course_Student.Where(a => a.DashAssigned != true).FirstOrDefault();
+                if(assignFinder.DashAssigned != true)
+                {
+
+                    holder.Add(assignFinder);
+                }
+
+            }
 
             List<student> stufinder = new List<student>();
-           
-            foreach(var coursestu in courseLister)
-            {
-                var findah = db.students.Where(a => a.StudentID.Equals(coursestu.StudentID)).FirstOrDefault();
+            foreach (var stuobj in holder) 
+             {
+                var stufound = db.students.Where(a => a.StudentID.Equals(stuobj.StudentID)).FirstOrDefault();
 
-                if (findah != null)
+                if(stufound != null)
                 {
-                    stufinder.Add(findah);
+
+                    stufinder.Add(stufound); 
+                }
+
+             }
+
+
+            List<Student_Grouper> stugrouper = new List<Student_Grouper>(); //list of student grouper objects associated with the list of student id's
+            foreach (var stuObj2 in stufinder)
+            {
+                var stugroup = db.Student_Grouper.Where(a => a.StudentID == stuObj2.StudentID).ToList();
+
+                foreach(var item1 in stugroup)
+                {
+                    stugrouper.Add(item1);
                 }
             }
 
-            //now we have the list of student objects to return, but how will we return these???
+            List<grouper> groupgetter = new List<grouper>();
+            foreach(var groupinfo in stugrouper)
+            {
+                var groupinfogetter = db.groupers.Where(a => a.GroupID == groupinfo.GroupID && a.CourseID == input).ToList();
+
+                foreach (var item1 in groupinfogetter)
+                {
+
+                    Debug.WriteLine(item1);
+
+
+                    groupgetter.Add(item1); //list of groups in the course! We have ID's
+                }
+            }
+
+
+            List<Student_Grouper> reverser = new List<Student_Grouper>();
+            foreach(var groupremover in groupgetter)
+            {
+                var groupreverser = db.Student_Grouper.Where(a => a.GroupID == groupremover.GroupID).ToList();
+
+                foreach (var item1 in groupreverser)
+                {
+                    reverser.Add(item1);
+                }
+            
+            }
+
+
+
+            List<student> sturemov = new List<student>();
+            foreach(var sturemove in reverser)
+            {
+                var removalstu = db.students.Where(a => a.StudentID == sturemove.StudentID).ToList();
+
+                foreach (var item1 in removalstu)
+                {
+                    sturemov.Add(item1);
+                }
+            }
+
+
+            foreach(var sturemoved in sturemov)
+            {
+                stufinder.Remove(sturemoved);
+            }
+
+
+
 
             return Json(stufinder.ToList(), JsonRequestBehavior.AllowGet);
 
         }
 
 
+        [HttpGet]
+        public ActionResult GetTableNames(int input)
+        {
+
+            List<student> stufinder = new List<student>();
+
+            var stufound = db.students.Where(a => a.StudentID.Equals(input)).FirstOrDefault();
+            //tried using Entity property. Having issues. May have to use traditional SQL. 
+
+
+            if (stufound != null)
+            {
+                stufinder.Add(stufound);
+            }
+
+            return Json(stufinder, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult CreateStudentGroups(StudentGroupCreationViewModel modelThing)
+        {
+            //initially, check to see that the form submitted is valid
+            if (ModelState.IsValid)
+            {
+
+
+
+                //retrieve the values of the posted three selected students
+                var select1 = Request.Form["1"].AsInt();
+                var select2 = Request.Form["2"].AsInt();
+                var select3 = Request.Form["3"].AsInt(); 
+                var selectedClass = (int?)Convert.ToInt32(Request.Form["hiddenInfo"]); //this holds the information for the selected course
+                int holder = new int();
+
+
+
+                // search. Let's find the course_student objects based on the studentID and the selected class
+                var obj1 = db.Course_Student.Where(a => a.StudentID == (select1) && a.CourseID == (selectedClass)).FirstOrDefault();
+                var obj2 = db.Course_Student.Where(a => a.StudentID == (select2) && a.CourseID == (selectedClass)).FirstOrDefault();
+                var obj3 = db.Course_Student.Where(a => a.StudentID == (select3) && a.CourseID == (selectedClass)).FirstOrDefault();
+
+                /*  //set dash assigned property to true!!! Now they shouldn't appear on the dropdown
+                  obj1.DashAssigned = true;
+                  obj2.DashAssigned = true;
+                  obj3.DashAssigned = true;
+
+
+
+                  //unsure if this will work. Trying to add/update entity objects once dashassigned is changed
+                  db.Course_Student.AddOrUpdate(obj1);
+                  db.Course_Student.AddOrUpdate(obj2);
+                  db.Course_Student.AddOrUpdate(obj3);
+                  db.SaveChanges();
+
+                  */
+
+
+                Debug.WriteLine(obj1.DashAssigned.ToString());
+                Debug.WriteLine(obj2.DashAssigned.ToString());
+                Debug.WriteLine(obj3.DashAssigned.ToString());
+
+
+
+                //clustering together student info to get session variables for confirmation screen. 
+                var student1finder = db.students.Where(a => a.StudentID == (select1)).FirstOrDefault();
+                var student2finder = db.students.Where(a => a.StudentID == (select2)).FirstOrDefault();
+                var student3finder = db.students.Where(a => a.StudentID == (select3)).FirstOrDefault();
+
+                //cobbling session info
+                Session["Student1Info"] = student1finder.StudentFirstName + " " + student1finder.StudentLastName;
+                Session["Student2Info"] = student2finder.StudentFirstName + " " + student2finder.StudentLastName;
+                Session["Student3Info"] = student3finder.StudentFirstName + " " + student3finder.StudentLastName;
+
+
+
+
+
+
+
+                //so now we are searching the group table to find if  a group object already exists for this course id
+                var groupnumFinder = db.groupers.Where(a => a.CourseID == (selectedClass)).FirstOrDefault();
+
+                if (groupnumFinder == null)
+                {
+                    holder = 1;
+                }
+                else
+                {
+                    holder = 2;
+                }
+
+
+
+                //create a grouper object
+                var groupCreate = new grouper
+                {
+                    GroupID = default,
+                    CourseID = selectedClass,
+                    GroupNumInCourse = holder //use logic to create modular holder object
+                };
+
+
+                //add object to model
+                db.groupers.AddOrUpdate(groupCreate);
+
+
+
+                //save changes to database - unsure if this will work without mysql instantiated connection (need to test on desktop)
+                db.SaveChanges();
+
+                var groupidfinder = groupCreate.GroupID;
+                var groupnum = groupCreate.GroupNumInCourse;
+
+                //cobbling together further session info
+                Session["GroupID"] = groupidfinder;
+                Session["GroupNumInCourse"] = groupnum;
+
+
+
+
+                /** create three new Student_Grouper objects based on information provided. 
+                 */
+
+
+                //first student created
+                var StuGroupCreate = new Student_Grouper
+                {
+                    GroupID = groupidfinder,
+                    GroupMemberID = default,
+                    StudentID = select1,
+                };
+                db.Student_Grouper.AddOrUpdate(StuGroupCreate);//add first student
+
+                //second student created
+                var StuGroupCreate2 = new Student_Grouper
+                {
+                    GroupID = groupidfinder,
+                    GroupMemberID = default,
+                    StudentID = select2,
+                };
+                db.Student_Grouper.AddOrUpdate(StuGroupCreate2); //add second student 
+
+                //third student created 
+                var StuGroupCreate3 = new Student_Grouper
+                {
+                    GroupID = groupidfinder,
+                    GroupMemberID = default,
+                    StudentID = select3,
+
+                };
+                db.Student_Grouper.AddOrUpdate(StuGroupCreate3); //add third student
+
+
+
+
+
+
+
+                db.SaveChanges();
+
+
+
+
+                //return user to completion screen
+                return RedirectToAction("GroupCreated");
+
+
+                //find way to retroactively remove students based on those three id's?
+            }
+
+
+
+            //we have the three selected students in the group. 
+            /*
+             * We can flip idea on it's head 
+             * Create table object within grouper table: this will autoiterate the groupID 
+             * Grab courseID from selected dropdown result
+             * Insert Group number in course: if no existing entry, insert 1, if otherwise, 2
+             * 
+             * 
+             * Grouper object now created. We can now scrape info from grouper
+             * to create student_grouper objects...BASED on the three Id's retrieved from the form!
+             * Group member iD autoincrements..no need to worry about it 
+             * Student ID can be inserted from the three table values
+             * Group ID can be grabbed from the previously inserted grouper object.
+             * 
+             *
+             */
+
+            return View();
+
+        }
+
+
+
+        public ActionResult GroupCreated()
+        {
+            //Controller method displaying a view that displays once a group is created. 
+
+
+            return View();
+        }
+
+
+        public ActionResult TableauPages()
+        {
+            return View();
+
+        }
 
     }
 

@@ -490,6 +490,8 @@
     <Content Include="Views\Home\CourseCreated.cshtml" />
     <Content Include="Views\Home\SubmittedSchedule.cshtml" />
     <Content Include="Views\Home\CreateStudentGroups.cshtml" />
+    <Content Include="Views\Home\GroupCreated.cshtml" />
+    <Content Include="Views\Home\TableauPages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,290 @@
+﻿
+@{
+    ViewBag.Title = "TableauPages";
+}
+
+
+
+
+<!DOCTYPE HTML>
+
+
+<style>
+    body {
+        background: url(https://i.imgur.com/VtXEfl0.png);
+        background-size: cover;
+    }
+
+
+    /**Rectangle 1 */
+
+
+
+    .smulogo {
+        position: absolute;
+        width: 350px;
+        height: 125px;
+        left: 0px;
+        top: 0px;
+        background: url(https://i.imgur.com/4IpDWG0.png);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    #rect1 {
+        position: absolute;
+        width: 2240px;
+        height: 125px;
+        left: 350px;
+        top: 0px;
+        background: #151C55;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    #notice {
+        background: #151C55;
+        border: 1px solid #8A704C;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .evalConfirm -_body {
+        margin: -70px 0 30px;
+    }
+
+
+    .evalConfirm ._body ._box {
+        margin: auto;
+        max-width: 80%;
+        padding: 50px;
+        background: white;
+        border-radius: 3px;
+        box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+        -moz-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+        -webkit-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+    }
+
+    #linker {
+        border: 1px solid #8A704C;
+        background: #8A704C;
+        color: #fff;
+        padding: 20px;
+        cursor: pointer;
+        -webkit-border-radius: 4px;
+    }
+
+    #selectopts {
+        z-index: 1;
+        background: #151C55;
+        margin-left: 1000px;
+    }
+
+    #dropdownMenuButton {
+        background: #151C55;
+    }
+
+    #hublogo {
+        position: absolute;
+        width: 807px;
+        height: 65px;
+        left: 394px;
+        top: 40px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 52px;
+        color: #FFFFFF;
+    }
+</style>
+<html>
+
+
+<head>
+    <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+    <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
+    <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81J8R69BHH"></script>
+    <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-81J8R69BHH');
+    </script>
+    <title> Completed Evaluation </title>
+
+
+
+    <script>
+        $(document).on('load', function (e)
+        {
+            document.getElementById("chart1").style.width = 700;
+            document.getElementById("chart1").style.height = 500;
+
+            document.getElementById("chart1").style.visibility = "hidden";
+            document.getElementById("chart2").style.visibility = "hidden";
+            document.getElementById("chart3").style.visibility = "hidden";
+            document.getElementById("chart4").style.visibility = "hidden";
+            document.getElementById("chart5").style.visibility = "hidden";
+            document.getElementById("chart6").style.visibility = "hidden";
+
+        });
+
+    </script>
+
+
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+<body>
+
+    <div class="dropdown" id="selectopts">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Login Options
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="@Url.Action("LogOutStudent", "Home")">Logout</a>
+            <a class="dropdown-item" href="@Url.Action("TableauPages", "Home")"> Student Analytics </a>
+
+        </div>
+    </div>
+
+    <div class="evalConfirm">
+        <div class="navbar-header">
+            <div class="rect" id="rect1"> </div>
+            <div class="smulogo"> </div>
+            <h2 id="hublogo">  Student Analytics </h2>
+
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+
+        <div class="_body">
+            <div class="_box" id="notice">
+
+                <br />
+
+
+
+                <div class="text-center">
+                    <input id="chart1enable" onclick="document.getElementById('chart1').style.visibility = 'visible';"
+                           name="submit" type="submit" value="Evaluation Scores by Course and Year" style=" position: center;  height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; text-align: center; background: #151C55; color: antiquewhite;">
+                </div>
+
+                <div class="text-center">
+                    <input id="chart2enable"  onclick="document.getElementById('chart2').style.visibility = 'visible';" name="submit" type="submit" value="Average Evaluation Scores by Group and Year:" style=" position: center;  height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; text-align: center; background: #151C55; color: antiquewhite;">
+                </div>
+
+                <div class="text-center">
+                    <input id="chart3enable" onclick="document.getElementById('chart3').style.visibility = 'visible';" name="submit" type="submit" value="Complete vs Incomplete Evaluations by Professor and Course" style=" position: center;  height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; text-align: center; background: #151C55; color: antiquewhite;">
+                </div>
+
+                <div class="text-center">
+                    <input id="chart4enable" onclick="document.getElementById('chart4').style.visibility = 'visible';" name="submit" type="submit" value="Average Days Evaluations are Submitted Before the Due Date" style=" position: center;  height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; text-align: center; background: #151C55; color: antiquewhite;">
+                </div>
+
+                <div class="text-center">
+                    <input id="chart5enable" onclick="document.getElementById('chart5').style.visibility = 'visible';" name="submit" type="submit" value="Amount of Evaluations Due by Week:" style=" position: center;  height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; text-align: center; background: #151C55; color: antiquewhite;">
+                </div>
+
+
+                <div class="text-center">
+                    <input id="chart6enable" onclick="document.getElementById('chart6').style.visibility = 'visible';" name="submit" type="submit" value="Evaluation Completion Dates" style=" position: center; width:auto; height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; text-align: center; background: #151C55; color: antiquewhite;">
+                </div>
+
+
+
+
+                <div id="chart1" style="visibility: hidden; width:500px; height:500px;">
+                    <h2> <strong> Evaluation Scores by Course and Year: </strong></h2>
+                    <div class='tableauPlaceholder' id='viz1649260580425' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;AverageScoresofGroups&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SMU_BI_Charts&#47;AverageScoresofGroups' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;AverageScoresofGroups&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+                    <script type='text/javascript'>var divElement = document.getElementById('viz1649260580425'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '1500px'; vizElement.style.height = '850px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+                </div>
+                <div id="chart2" style="visibility: hidden;" >
+                    <h2> <strong> Average Evaluation Scores by Group and Year: </strong></h2>
+                    <div class='tableauPlaceholder' id='viz1649260755952' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;AverageScoresofGroups&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SMU_BI_Charts&#47;AverageScoresofGroups' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;AverageScoresofGroups&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+                    <script type='text/javascript'>var divElement = document.getElementById('viz1649260755952'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '1500px'; vizElement.style.height = '850px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+                </div>
+                <div id="chart3" style="visibility: hidden;"  >
+
+
+                    <h2> <strong> Complete vs Incomplete Evaluations by Professor and Course: </strong></h2>
+                    <div class='tableauPlaceholder' id='viz1649260800379' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;CompletevsIncomplete&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SMU_BI_Charts&#47;CompletevsIncomplete' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;CompletevsIncomplete&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+                    <script type='text/javascript'>var divElement = document.getElementById('viz1649260800379'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '1500px'; vizElement.style.height = '850px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+                </div>
+
+                <div id="chart4" style="visibility: hidden;" >
+                    <h2> <strong> Average Days Evaluations are Submitted Before the Due Date:</strong></h2>
+                    <div class='tableauPlaceholder' id='viz1649260891499' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;AverageDaysBeforeDueDate&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SMU_BI_Charts&#47;AverageDaysBeforeDueDate' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;AverageDaysBeforeDueDate&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+                    <script type='text/javascript'>var divElement = document.getElementById('viz1649260891499'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '1250px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '1250px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '950px'; vizElement.style.maxHeight = (divElement.offsetWidth * 1.77) + 'px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+                </div>
+                <div id="chart5" style="visibility: hidden;" >
+
+
+                    <h2> <strong> Amount of Evaluations Due by Week:</strong></h2>
+                    <div class='tableauPlaceholder' id='viz1649260951005' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;DueDatesbyWeek&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SMU_BI_Charts&#47;DueDatesbyWeek' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;DueDatesbyWeek&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+                    <script type='text/javascript'>var divElement = document.getElementById('viz1649260951005'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '1250px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '1250px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '950px'; vizElement.style.maxHeight = (divElement.offsetWidth * 1.77) + 'px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+                </div>
+                <div id="chart6" style="visibility: hidden;" >
+
+
+                    <h2> <strong> Evaluation Completion Dates :</strong></h2>
+                    <div class='tableauPlaceholder' id='viz1649261123811' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;CompletionDates&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SMU_BI_Charts&#47;CompletionDates' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SM&#47;SMU_BI_Charts&#47;CompletionDates&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+                    <script type='text/javascript'>var divElement = document.getElementById('viz1649261123811'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '1250px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '1250px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.minWidth = '1700px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '950px'; vizElement.style.maxHeight = (divElement.offsetWidth * 1.77) + 'px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+

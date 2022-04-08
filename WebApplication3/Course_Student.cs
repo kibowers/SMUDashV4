@@ -17,5 +17,9 @@ namespace WebApplication3
         public int StudentID { get; set; }
 
         public int CourseID { get; set; }
+
+        [NotMapped]
+        public bool DashAssigned { get; set; } = false;
+        /* new unmapped entity property. created so that I have easy way to filter students based on this. */
     }
 }

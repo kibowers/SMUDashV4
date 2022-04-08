@@ -10,7 +10,7 @@ namespace WebApplication3
     public partial class grouper
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GroupID { get; set; }
 
         public int? CourseID { get; set; }

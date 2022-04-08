@@ -10,11 +10,14 @@ namespace WebApplication3
     public partial class Student_Grouper
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GroupMemberID { get; set; }
 
         public int? GroupID { get; set; }
 
         public int? StudentID { get; set; }
+
+
+
     }
 }

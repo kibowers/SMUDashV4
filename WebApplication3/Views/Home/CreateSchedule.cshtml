@@ -226,8 +226,14 @@
                                                         <label for="profCourses"> Course Selection </label>
                                                         @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "CourseID", "CourseTitle"), new { @required = true, @id = "profCourses", @class = "form-control", @style = "margin-left:15px;" })
                                                         @Html.Hidden("testvar", 0)
-                                                        <input type="hidden" class="hiddenthing" id="hiddenInfo" name="hiddenInfo" />
+                                                        <input type="hidden" class="hiddenthing" id="hiddenInfo" value="0" name="hiddenInfo" />
+                                                        <label id="e1" style="color:red;"> </label>
                                                         <br />
+
+
+
+
+
                                                         <label for="scheduleTime"> Evaluation Due Date</label>
 
                                                         <div class="container">
@@ -240,6 +246,10 @@
                                                                 minDate: moment()
                                                             });
                                                         </script>
+
+                                                        <br />
+                                                        <label id="e2" style="color:red;"> </label>
+
                                                     </div>
 
 
@@ -250,7 +260,6 @@
                                             </div>
 
                                             <br />
-                                            <label id="e1"> </label>
 
 
 
@@ -280,39 +289,6 @@
 
 
 
-            $('#scheduleForm').on('submit', function (e) {
-
-                const scheduledTime = document.getElementById("scheduleTime").value;
-                var fName1 = document.getElementById("fname1").value;
-
-
-
-                if (scheduledTime > 0) {
-
-                    alert("looking good");
-                    return true;
-
-                }
-                else {
-
-                    e.preventDefault();
-                    document.getElementById('e1').innerHTML = "Please assure you've scheduled a time for completing evaluations. ";
-
-                }
-
-                if (fName1 != "" || " ") {
-                    alert("naame checks out");
-                    return true;
-                }
-                else {
-                    e.preventDefault();
-                    document.getElementById('e2').innerHTML = "Please enter a valid name.";
-                }
-
-                return false;
-                alert("Errors are present in your evaluation submission.");
-
-            });
 
 
             $(document).on('change', '#profCourses', function () {
@@ -340,6 +316,38 @@
 
 
 
+            $(document).on('submit', function (e) {
+
+                const scheduledTime = document.getElementById("scheduleTime").value;
+                var hiddenInfo = document.getElementById("hiddenInfo").value;
+
+
+
+                if (scheduledTime > 0) {
+
+                    alert("looking good");
+                    return true;
+
+                }
+                else {
+
+                    e.preventDefault();
+                    document.getElementById('e2').innerHTML = "Please assure you've scheduled a time for completing evaluations. ";
+
+                }
+                if (hiddenInfo == 0) {
+                    e.preventDefault();
+                    document.getElementById('e1').innerHTML = "Please assure you have selected a course to schedule an evaluation for.";
+                }
+                else
+                {
+                    return true;
+                }
+
+                return false;
+                alert("Errors are present in your evaluating scheduling submission.");
+
+            });
 
         </script>
 
