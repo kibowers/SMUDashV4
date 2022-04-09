@@ -290,44 +290,7 @@
 
 
 
-            $(document).on('change', '#profCourses', function () {
-                getOption();
-                const limit = 5
-                $.ajax({
-                                    type: 'GET',
-                                    url: '@Url.Action("GetTableInfo", "Home")',
-                                    datatype: JSON,
-                                    data: { 'input': $("#profCourses").val() },
-                                    success: function (data) {
-                                        $('#stuTable tbody').empty();
-                                        var iterateId = 0;
-                                        $.each(data, function (i, item) {
-                                            iterateId++;
 
-                                            //create incrementing id's????
-                                            var stuName = item.StudentFirstName + " " + item.StudentLastName;
-                                            var rows = "<tr>"
-                                                + "<td class='text-center'>" + stuName + "</td>"
-                                                + "<td class='text-center'>" + '<input class="stusel" type="checkbox" onclick="stuSel();" id="stuId' + item.StudentID + '"value="' + item.StudentID + '"/>' + "</td>"
-                                                + '<input type="hidden" class="hidden" value="' + stuName + '" id="' + "g" + item.StudentID + '"/> '
-                                                + "</tr>";
-
-                                            $('#stuTable tbody').append(rows);
-                                        });
-                                    },
-                    error: function (data) {
-                        alert("You have completed all group scheduling for this course.");
-
-                    }
-
-
-
-                                    //need to create some kind of javascript function to prevent the user from selecting more than three radio buttons
-
-                });
-                document.getElementById('tableHolder').style.visibility = "visible"; //make datatable visible at this point as it now has data
-
-            });
 
 
 
@@ -532,7 +495,87 @@
 
 
 </html>
-<script type="text/javascript">
+    <script type="text/javascript">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function getOption() {
+        selectElement = document.querySelector('#profCourses');
+        hiddenthing = selectElement.value;
+        document.querySelector('.hiddenthing').value = hiddenthing;
+        alert("Course selected. ");
+        $('testvar').val(hiddenthing);
+        $("#profCourses").prop('disabled', true);
+    };
+
+        $(document).on('change', '#profCourses', function () {
+            getOption();
+            const limit = 5
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetTableInfo", "Home")',
+                datatype: JSON,
+                data: { 'input': $("#profCourses").val() },
+                success: function (data) {
+                    $('#stuTable tbody').empty();
+                    var iterateId = 0;
+                    $.each(data, function (i, item) {
+                        iterateId++;
+
+                        //create incrementing id's????
+                        var stuName = item.StudentFirstName + " " + item.StudentLastName;
+                        var rows = "<tr>"
+                            + "<td class='text-center'>" + stuName + "</td>"
+                            + "<td class='text-center'>" + '<input class="stusel" type="checkbox" onclick="stuSel();" id="stuId' + item.StudentID + '"value="' + item.StudentID + '"/>' + "</td>"
+                            + '<input type="hidden" class="hidden" value="' + stuName + '" id="' + "g" + item.StudentID + '"/> '
+                            + "</tr>";
+
+
+                        
+                        $('#stuTable tbody').append(rows);
+
+                    });
+
+                },
+                error: function (data) {
+                    alert("You have completed all group scheduling for this course.");
+
+                }
+
+
+                //need to create some kind of javascript function to prevent the user from selecting more than three radio buttons
+
+            })
+
+            $(document).ajaxSuccess(function () {
+                var colinf = document.getElementsByTagName('td');
+
+                if (colinf.length == 0 || null) {
+                    alert("All students have been placed into groups for this course or you have selected a non valid course option. Please select another course to place groups for.");
+                    $("#profCourses").prop('disabled', false);
+                    return false;
+                }
+            });
+
+            document.getElementById('tableHolder').style.visibility = "visible"; //make datatable visible at this point as it now has data
+        });
+
+
+
 
     $(document).on('submit', function (e) {
 
@@ -576,7 +619,7 @@
         else {
             e.preventDefault();
 
-            document.getElementById('e1').innerHTML = "An error in your input is detected. Please make sure your sliders have been seletced for an input greater than 0.";
+            document.getElementById('e1').innerHTML = "An error in your input is detected. ";
         }
 
 
@@ -586,5 +629,5 @@
     });
 
 
-</script>
+    </script>
 }
