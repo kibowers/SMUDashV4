@@ -241,7 +241,12 @@
                                                         </h2>
                                                         <br />
                                                         <label for="profCourses"> Course Selection </label>
-                                                        @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "CourseID", "CourseTitle"), new { @required = true, @id = "profCourses", @class = "form-control", @style = "margin-left:15px;" })
+                                                        @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "CourseID", "CourseTitle"), new { @required = true,
+                                                       @id = "profCourses",
+                                                       
+                                                       @class = "dropdown-item-text",
+                                                       @title= "Please select a course to schedule student evaluations for.",
+                                                       @style = "margin-left:15px;" })
                                                         @Html.Hidden("testvar", 0)
                                                         <input type="hidden" class="hiddenthing" id="hiddenInfo" value="0" name="hiddenInfo" />
                                                         <label id="e1" style="color:red;"> </label>

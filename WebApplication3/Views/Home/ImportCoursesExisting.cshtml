@@ -1,0 +1,484 @@
+﻿@model SelectStudentCourseViewModel
+@{
+    ViewBag.Title = "ImportCoursesExisting";
+}
+
+<h2>Import Existing Course</h2>
+
+
+
+@using (Html.BeginForm("ImportCoursesExisting", "Home", FormMethod.Post, new { id = "importcoursesexistingForm", enctype = "multipart/form-data" }))
+{
+    <fieldset>
+    </fieldset>
+    <style>
+        body {
+            background: url(https://i.imgur.com/VtXEfl0.png);
+            background-size: cover;
+        }
+
+
+        /**Rectangle 1 */
+
+
+
+        .smulogo {
+            position: absolute;
+            width: 350px;
+            height: 125px;
+            left: 0px;
+            top: 0px;
+            background: url(https://i.imgur.com/4IpDWG0.png);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        #rect1 {
+            position: absolute;
+            width: 2240px;
+            height: 125px;
+            left: 350px;
+            top: 0px;
+            background: #151C55;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        #notice {
+            background: #151C55;
+            border: 1px solid #8A704C;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .evalConfirm -_body {
+            margin: -70px 0 30px;
+        }
+
+
+        .evalConfirm ._body ._box {
+            margin: auto;
+            max-width: 80%;
+            padding: 50px;
+            background: white;
+            border-radius: 3px;
+            box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+            -moz-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+            -webkit-box-shadow: 0 0 35px rgba(10, 10, 10,0.12);
+        }
+
+        #linker {
+            border: 1px solid #8A704C;
+            background: #8A704C;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+            -webkit-border-radius: 4px;
+        }
+
+        #selectopts {
+            z-index: 1;
+            background: #151C55;
+            margin-left: 500px;
+            position: absolute;
+            width: 195px;
+            height: 35px;
+            left: 1245px;
+            top: 48px;
+        }
+
+        #dropdownMenuButton {
+            background: #151C55;
+        }
+
+        #rect2 {
+            position: center;
+            width: 1100px;
+            height: 768px;
+            left: 244px;
+            top: 194px;
+            background: #DCBDA0;
+            border: 1px solid #8A704C;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+
+        #hublogo {
+            position: absolute;
+            width: 807px;
+            height: 65px;
+            left: 394px;
+            top: 40px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 52px;
+            color: #FFFFFF;
+        }
+
+
+
+        #instruct1 {
+            position: absolute;
+            width: 470px;
+            height: 444px;
+            left: 400px;
+            bottom:50px;
+            top: 150px;
+        }
+    </style>
+
+
+    <html>
+    <head>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+              rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+              rel="stylesheet" />
+
+        <!-- MDB -->
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+
+
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
+        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-81J8R69BHH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-81J8R69BHH');
+        </script>
+        <title> Import Existing Course </title>
+
+
+
+
+
+    </head>
+
+    <body>
+
+        <script>
+
+
+
+        </script>
+        <div class="dropdown" id="selectopts">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login Options
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="@Url.Action("LogOutProf", "Home")">Logout</a>
+                <a class="dropdown-item" href="@Url.Action("TableauPages", "Home")"> Student Analytics </a>
+                <a class="dropdown-item" href="@Url.Action("ProfHub","Home")"> Professor Dashboard</a>
+            </div>
+        </div>
+
+        <div class="evalConfirm">
+            <div class="navbar-header">
+                <div class="rect" id="rect1"> </div>
+                <div class="smulogo"> </div>
+                <h2 id="hublogo">  Import Using Existing Course </h2>
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+        <section class="h-100 gradient-form ">
+            <div class="container py-5 h-100" id="container1">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                    <div class="rect" id="rect2">
+                                        <div class="card-body p-md-5 mx-md-4">
+                                            <form enctype="multipart/form-data">
+                                                @Html.AntiForgeryToken()
+                                                <div class="form-outline mb-4">
+
+                                                    <div class="container" style=" font-style: normal; font-weight: 500; font-size: 18px; line-height: 36px;">
+
+
+                                                        <div id="hidcontainer">
+                                                            <label id="thing1" style=""> Select a Course: </label>
+                                                            <br />
+                                                            @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "CourseID", "CourseTitle"), new {
+                                                           @required = true,
+                                                           @id = "profCourses",
+                                                           @class= "dropdown-item-text",
+                                                           @title ="Select an existing course you would like to create a new instance for.",
+                                                           @onclick = "$('.tooltip').remove();",
+                                                           
+                                                       })
+                                                            <input type="hidden" class="hiddenthing" id="hiddenInfo1" name="hiddenInfo1" />
+                                                            <script> $("#profCourses").tooltip();</script>
+                                                            <label for="profCourses" id="prehidlabel"> Please select an existing course. </label>
+
+                                                        </div>
+
+                                                        <!-- Html year selector via range: validation implemented so it only allows selections two years in advance-->
+
+
+                                                        <br />
+                                                        <div id="hidcontainer2" style="visibility:hidden">
+                                                            <a href="~/Uploads/samplecsv.csv"><img src="https://i.imgur.com/xS5uWF0.png" class="img-responsive" id="instruct1" />  </a>
+
+
+
+                                                            <label for="courseYear"> Select Course Year </label>
+                                                            <input name="courseYear"
+                                                                   required
+                                                                   type="range"
+                                                                   id="courseYear"
+                                                                   autocomplete="off"
+                                                                   onclick = "$('.tooltip').remove();",
+                                                                   title="Please select the year this course will be offered."
+                                                                   oninput="document.getElementById('l1').innerHTML = this.value" />
+                                                            <script>$("#courseYear").tooltip();</script>
+
+                                                            <!-- year auto update-->
+                                                            <label id="l1" style="padding-left:20px"> </label>
+                                                            <label class="errmsg" id="error3" style="padding-left: 20px; color:red;"></label>
+
+                                                            <br />
+
+
+                                                            <label for="cTerm" id="thing4"> Select Course Term </label>
+                                                            <br />
+
+
+                                                            <select id="cTerm" 
+                                                                    onclick = "$('.tooltip').remove();",
+                                                                    title="Please select the course term within the year that this course will be offered" required>
+                                                                <option value="0"> Select a course term. </option>
+                                                                <option value="1"> Term 1  </option>
+                                                                <option value="2"> Term 2  </option>
+                                                                <option value="3A"> Term 3A  </option>
+                                                                <option value="3B"> Term 3B  </option>
+                                                            </select>
+                                                            <script>$("#cTerm").tooltip();</script>
+
+                                                            <input type="hidden" class="hiddenthing" value="" id="hiddenInfo2" name="hiddenInfo2" />
+                                                            <br />
+                                                            <label class="errmsg" id="error4" style="padding-left: 20px; color:red;"></label>
+
+                                                            <br />
+                                                            <br />
+
+
+                                                            <label for="file"> Import Student List from CSV  </label>
+
+
+                                                            <input type="file"
+                                                                   required
+                                                                   id="file"
+                                                                   onclick = "$('.tooltip').remove();"
+                                                                   title="Please provide a .CSV file with the list of students within your course."
+                                                                   name="file"
+                                                                   accept=".csv" />
+                                                            <script>$("#file").tooltip();</script>
+
+                                                            <!-- potential "All" issue? -->
+                                                            <br />
+                                                            <input type="submit" name="submit" id="createsubmit" value="Create New Course" style="position: center; width: 262px; height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; /* identical to box height */ text-align: center; background: #151C55; color: antiquewhite;" />
+                                                            @ViewBag.Message
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+        </section>
+
+        <script>
+
+
+
+
+            //automatically set course year on load so as to futureproof application
+            $(window).on('load', function () {
+                var currYear = new Date().getFullYear();
+                var nextYear = new Date().getFullYear() + 1;
+                var nextnextYear = new Date().getFullYear() + 2;
+                var inputgrabber = document.getElementById('courseYear');
+                inputgrabber.setAttribute("min", currYear);
+                inputgrabber.setAttribute("max", nextnextYear);
+                inputgrabber.setAttribute("value", currYear);
+
+
+
+                inputgrabber.setAttribute("step", 1);
+
+                document.getElementById('l1').innerHTML = inputgrabber.value;
+
+
+
+
+                document.querySelectorAll("#profCourses").forEach(opt => {
+                    if (opt.value == 0) {
+                        opt.disabled = true;
+                    }
+                });
+                $("#profCourses").prop('disabled', false);
+
+
+
+
+            });
+
+            function getOption() {
+                selectElement = document.querySelector('#cTerm');
+                hiddenthing = selectElement.value;
+                document.getElementById("hiddenInfo2").value = hiddenthing;
+                $("#cTerm").prop('disabled', true);
+            };
+
+
+
+            $(document).on('change', '#profCourses', function () {
+
+
+
+
+                selectElement = document.querySelector('#profCourses');
+                hiddenthing = selectElement.value;
+
+
+
+                if (hiddenthing == 0) {
+                    alert("Please select a valid course.");
+                    $("#profCourses").prop('disabled', false);
+                    return false;
+                }
+                else {
+
+                    document.getElementById("hiddenInfo1").value = hiddenthing;
+
+
+
+                    $("#profCourses").prop('disabled', true);
+
+
+
+
+
+
+                    document.getElementById("prehidlabel").style.visibility = "hidden";
+                    document.getElementById("hidcontainer2").style.visibility = "visible";
+
+                }
+
+
+
+            });
+
+
+
+            $(document).on('change', '#cTerm', function () {
+                getOption();
+
+                $("#cTerm").prop('disabled', true);
+            });
+
+            $("#importcoursesexistingForm").on('submit', function (e) {
+                var dataisValid = false;
+
+                selectElement = document.getElementById("profCourses"); //getting course title
+                hiddenthing1 = selectElement.value;
+
+                selectElement3 = document.getElementById("courseYear");
+                selectElement4 = document.querySelector('#cTerm').getAttribute("disabled");
+
+
+                if (selectElement != null) {
+                    dataisValid = true;
+                }
+                else {
+                    e.preventDefault();
+
+                    document.getElementByID('error1').innerHTML = "Please assess your course name input.";
+                }
+
+
+                if (selectElement4 != null) {
+
+                    dataisValid = true;
+
+
+                }
+                else {
+                    e.preventDefault();
+
+
+
+
+
+                    document.getElementById('error4').innerHTML = "Please assess your course year input.";
+
+                }
+
+
+
+
+                if (dataisValid == false) {
+
+                    alert("Errors are present in your course input submission.");
+
+                }
+
+                return dataisValid;
+
+
+
+
+            });
+
+
+
+        </script>
+
+    </body>
+</html>
+}

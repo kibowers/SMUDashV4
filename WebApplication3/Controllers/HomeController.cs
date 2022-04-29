@@ -11,6 +11,7 @@ using System.Data.Entity.Migrations;
 
 namespace WebApplication3.Controllers
 {
+
     public class HomeController : Controller
     {
 
@@ -63,12 +64,13 @@ namespace WebApplication3.Controllers
                 var obj = db.students.Where(a => a.StudentEmail.Equals(objUser.StudentEmail) && a.StudentPassword.Equals(objUser.StudentPassword)).FirstOrDefault();
                 if (obj != null)
                 {
+                    HttpContext.Session.Timeout = 30;
+
                     Session["StudentEmail"] = obj.StudentEmail.ToString();
                     Session["StudentPassword"] = obj.StudentPassword.ToString();
                     Session["StudentFirstName"] = obj.StudentFirstName.ToString();
                     Session["StudentLastName"] = obj.StudentLastName.ToString();
                     Session["StudentID"] = obj.StudentID.ToString();
-
 
                     return RedirectToAction("PeerEval");
                 }
@@ -108,6 +110,8 @@ namespace WebApplication3.Controllers
                 var obj = db.professors.Where(a => a.ProfEmail.Equals(objUser.ProfEmail) && a.ProfPassword.Equals(objUser.ProfPassword)).FirstOrDefault();
                 if (obj != null)
                 {
+                    HttpContext.Session.Timeout = 30;
+
                     Session["ProfEmail"] = obj.ProfEmail.ToString();
                     Session["ProfID"] = obj.ProfID;
                     var profinfo = obj.ProfFirstName + " " + obj.ProfLastName;
@@ -163,36 +167,58 @@ namespace WebApplication3.Controllers
                 int stuID = Convert.ToInt32(Session["StudentID"]);
                 var compTime = DateTime.Now; //note to self: parentheses seem to indicate the method version w parameters, even if empty
                 var stuRecID = Request.Form["hiddenInfo"].AsInt();
+                var scID = Convert.ToInt32(Session["ScheduleID"]);
 
 
                 Console.WriteLine(CriticalThinkingProblemSolving_Score);
 
 
-                evaluation submittedEval = new evaluation
-                {
-                    CriticalThinkingProblemSolving_Score = CriticalThinkingProblemSolving_Score,
-                    InnovativeEntrepreneurialSkills_Score = InnovativeEntrepreneurialSkills_Score,
-                    CollaborationLeadership_Score = CollaborationLeadership_Score,
-                    Communication_Score = Communication_Score,
-                    Intercultural_Score = Intercultural_Score,
-                    DevelopmentInAsia_Score = DevelopmentInAsia_Score,
-                    EthicsSocialResponsibility_Score = EthicsSocialResponsibility_Score,
-                    ResiliencePositivity_Score = ResiliencePositivity_Score,
-                    SelfdirectednessMetalearning_Score = SelfdirectednessMetalearning_Score,
-                    Knowledge_Score = Knowledge_Score,
-                    CompletionTime = compTime,
-                    ScheduleID = 33,
+                /** evaluation submittedEval = new evaluation
+                 {
+                     CriticalThinkingProblemSolving_Score = CriticalThinkingProblemSolving_Score,
+                     InnovativeEntrepreneurialSkills_Score = InnovativeEntrepreneurialSkills_Score,
+                     CollaborationLeadership_Score = CollaborationLeadership_Score,
+                     Communication_Score = Communication_Score,
+                     Intercultural_Score = Intercultural_Score,
+                     DevelopmentInAsia_Score = DevelopmentInAsia_Score,
+                     EthicsSocialResponsibility_Score = EthicsSocialResponsibility_Score,
+                     ResiliencePositivity_Score = ResiliencePositivity_Score,
+                     SelfdirectednessMetalearning_Score = SelfdirectednessMetalearning_Score,
+                     Knowledge_Score = Knowledge_Score,
+                     CompletionTime = compTime,
+                     ScheduleID = 33,
 
 
-                    /* the fields below are not controlled via the form */
-                    StudentIDWriter = stuID,
-                    StudentIDReceiver = stuRecID
+                     /* the fields below are not controlled via the form 
+                     StudentIDWriter = stuID,
+                     StudentIDReceiver = stuRecID
 
-                };
+                 };
 
-                db.evaluations.Add(submittedEval);
+                 */
 
-                Session["CriticalThinkingProblemSolving_Score"] = submittedEval.CriticalThinkingProblemSolving_Score;
+                var foundEval = db.evaluations.Where(a => a.StudentIDWriter == stuID && a.ScheduleID == scID && a.StudentIDReceiver == stuRecID).FirstOrDefault();
+
+                foundEval.CriticalThinkingProblemSolving_Score = CriticalThinkingProblemSolving_Score;
+                foundEval.InnovativeEntrepreneurialSkills_Score = InnovativeEntrepreneurialSkills_Score;
+                foundEval.CollaborationLeadership_Score = CollaborationLeadership_Score;
+                foundEval.Communication_Score = Communication_Score;
+                foundEval.Intercultural_Score = Intercultural_Score;
+                foundEval.DevelopmentInAsia_Score = DevelopmentInAsia_Score;
+                foundEval.EthicsSocialResponsibility_Score = EthicsSocialResponsibility_Score;
+                foundEval.ResiliencePositivity_Score = ResiliencePositivity_Score;
+                foundEval.SelfdirectednessMetalearning_Score = SelfdirectednessMetalearning_Score;
+                foundEval.Knowledge_Score = Knowledge_Score;
+                foundEval.CompletionTime = compTime;
+                foundEval.ScheduleID = scID;
+
+                db.evaluations.AddOrUpdate(foundEval);
+
+
+
+                //db.evaluations.Add(submittedEval);
+
+                /*Session["CriticalThinkingProblemSolving_Score"] = submittedEval.CriticalThinkingProblemSolving_Score;
                 Session["InnovativeEntrepreneurialSkills_Score"] = submittedEval.InnovativeEntrepreneurialSkills_Score;
                 Session["CollaborationLeadership_Score"] = submittedEval.CollaborationLeadership_Score;
                 Session["Communication_Score"] = submittedEval.Communication_Score;
@@ -202,6 +228,17 @@ namespace WebApplication3.Controllers
                 Session["ResiliencePositivity_Score"] = submittedEval.ResiliencePositivity_Score;
                 Session["SelfdirectednessMetalearning_Score"] = submittedEval.SelfdirectednessMetalearning_Score;
                 Session["Knowledge_Score"] = submittedEval.Knowledge_Score;
+                */
+                Session["CriticalThinkingProblemSolving_Score"] = foundEval.CriticalThinkingProblemSolving_Score;
+                Session["InnovativeEntrepreneurialSkills_Score"] = foundEval.InnovativeEntrepreneurialSkills_Score;
+                Session["CollaborationLeadership_Score"] = foundEval.CollaborationLeadership_Score;
+                Session["Communication_Score"] = foundEval.Communication_Score;
+                Session["Intercultural_Score"] = foundEval.Intercultural_Score;
+                Session["DevelopmentInAsia_Score"] = foundEval.DevelopmentInAsia_Score;
+                Session["EthicsSocialResponsibility_Score"] = foundEval.EthicsSocialResponsibility_Score;
+                Session["ResiliencePositivity_Score"] = foundEval.ResiliencePositivity_Score;
+                Session["SelfdirectednessMetalearning_Score"] = foundEval.SelfdirectednessMetalearning_Score;
+                Session["Knowledge_Score"] = foundEval.Knowledge_Score;
 
                 db.SaveChanges();
                 return RedirectToAction("evalComplete");
@@ -288,6 +325,7 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public ActionResult GetDropdownList(int input)
         {
+
             List<Student_Grouper> stinkyFinder = new List<Student_Grouper>();
             List<student> stuFinder = new List<student>();
             List<SelectListItem> fine = new List<SelectListItem>();
@@ -299,8 +337,13 @@ namespace WebApplication3.Controllers
             // to the group IDs which we can use to retrieve info from student grouper 
 
             var grouplister = db.groupers.Where(a => a.CourseID.Value.Equals(input)).ToList();
+            var scheduleidfinder = db.scheduleEvals.Where(a => a.CourseID.Value.Equals(input)).FirstOrDefault();
 
 
+            if(scheduleidfinder != null)
+            {
+                Session["ScheduleID"] = scheduleidfinder.ScheduleID;
+            }
             //list for every group the student is in. We have group id's here. 
             var yourGroups = db.Student_Grouper.Where(a => a.StudentID.Value.Equals(stuID)).ToList();
 
@@ -340,6 +383,9 @@ namespace WebApplication3.Controllers
 
             }
 
+
+
+           
 
             return Json(stuFinder, JsonRequestBehavior.AllowGet);
 
@@ -469,6 +515,9 @@ namespace WebApplication3.Controllers
                 var classid = Request.Form["hiddenInfo"].AsInt();
                 Debug.WriteLine(classid);
 
+
+               
+                
                 var theEval = new scheduleEval
                 {
                     CourseID = classid,
@@ -486,7 +535,85 @@ namespace WebApplication3.Controllers
                 db.SaveChanges();
 
 
+                List<grouper> theGroups = new List<grouper>();
+
+                var finder1 = db.groupers.Where(a => a.CourseID == theEval.CourseID).ToList();
+
+
+                foreach (var holder1 in finder1)
+                {
+                    theGroups.Add(holder1);
+                }
+
+
+                //so now we have the groups. 
+                //from here, conceptually, should loop through groups in clusters somehow, each student grading another?
+
+
+
+
+
+                List<Student_Grouper> refList = new List<Student_Grouper>();
+
+                foreach(var foundGroup in theGroups)
+                {
+                    var finder2 = db.Student_Grouper.Where(a => a.GroupID == foundGroup.GroupID).ToList();
+                    //list of students within each group
+
+
+                    foreach (var foundstu in finder2)
+                    {
+
+
+
+
+                        //create evaluation objects where they grade themselves 
+                        var createdEval = new evaluation
+                        {
+                            ScheduleID = theEval.ScheduleID,
+                            StudentIDWriter = foundstu.StudentID,
+                            StudentIDReceiver = finder2[0].StudentID
+                        };
+
+                        var createdEval2 = new evaluation
+                        {
+                            ScheduleID = theEval.ScheduleID,
+                            StudentIDWriter = foundstu.StudentID,
+                            StudentIDReceiver = finder2[1].StudentID
+                        };
+
+                        var createdEval3 = new evaluation
+                        {
+
+                            ScheduleID = theEval.ScheduleID,
+                            StudentIDWriter = foundstu.StudentID,
+                            StudentIDReceiver = finder2[2].StudentID
+
+                        };
+
+
+                        db.evaluations.Add(createdEval);
+                        db.evaluations.Add(createdEval2);
+                        db.evaluations.Add(createdEval3);
+
+                        db.SaveChanges();
+
+                    }
+                }
+
+
                 /** go back and add more backend eval logic time permitting */
+
+
+                /** so:
+                 * for the course id within this object, we need to go to the grouper table and get the group id's assigned to that course id
+                 * using those group id's we need to go to student groupers and retrieve the student id's
+                 * then find some way to group together student id's. Maybe smart logic
+                 * Then insert the scheduleeval object scheduleid, the writer, and receiever into evaluations table
+                 * 
+                 * 
+                 * 
+                 * */
 
 
 
@@ -530,6 +657,25 @@ namespace WebApplication3.Controllers
                     }
                 }
             }
+
+
+            List<course> courseremover = new List<course>();
+            foreach (var foundcourse in courselister)
+            {
+                var existingSchedules = db.scheduleEvals.Where(a => a.CourseID == foundcourse.CourseID).FirstOrDefault();
+
+                if(existingSchedules != null)
+                {
+                    courseremover.Add(foundcourse);
+                }
+            }
+
+            foreach(var coursetoremove in courseremover)
+            {
+                courselister.Remove(coursetoremove);
+            }
+
+
             courselister.Insert(0, new course { CourseID = 0, CourseTitle = "Please select a course." });
             var viewModel = new SelectStudentCourseViewModel { Courses = courselister };
 
@@ -605,6 +751,7 @@ namespace WebApplication3.Controllers
 
             //duplicate course protection. 
             List<student> stufindah = new List<student>();
+            List<Course_Student> infocounter = new List<Course_Student>();
             var cc = courser.CourseCode;
             var ct = courser.CourseTitle;
             var cy = (int?)Convert.ToInt32(Request.Form["courseYear"]);
@@ -721,7 +868,7 @@ namespace WebApplication3.Controllers
                                     db.Entry(newStu).State = System.Data.Entity.EntityState.Modified;
 
 
-
+                                    infocounter.Add(newStu);
                                     db.Course_Student.AddOrUpdate(newStu);
 
 
@@ -733,8 +880,6 @@ namespace WebApplication3.Controllers
                                 }
                                 db.SaveChanges();
 
-                                Session["CreatedCourseStudents"] = stufindah;
-
 
                             }
 
@@ -745,6 +890,25 @@ namespace WebApplication3.Controllers
                     {
                         ViewBag.Message = "Double check your inputs.";
                     }
+
+
+
+
+                    List<student> names = new List<student>();
+                    foreach(var stuinfo in infocounter)
+                    {
+                        var finder1 = db.students.Where(a => a.StudentID.Equals(stuinfo.StudentID)).FirstOrDefault();
+
+                        if(finder1 != null)
+                        {
+                            names.Add(finder1);
+                        }
+                    }
+
+
+                    HttpContext.Session["CreatedCourseStudents"] = names;
+                    Session["NumOfStudents"] = infocounter.Count.ToString();
+
 
                     return RedirectToAction("courseCreated");
                 }
@@ -1146,6 +1310,224 @@ namespace WebApplication3.Controllers
         {
             return View();
 
+        }
+
+        [HttpGet]
+        public ActionResult GetExistingCourseDropdown()
+        {
+
+            var coursecompounder = db.courses.Where(a => a.CourseID > 0).ToList();
+
+            List<course> courselister = new List<course>();
+                    foreach (var coursename in coursecompounder)
+                    {
+                        var coursefound = coursename;
+                        courselister.Add(coursefound);
+                    }
+                
+            
+            courselister.Insert(0, new course { CourseID = 0, CourseTitle = "Please select a course." });
+            var viewModel = new SelectStudentCourseViewModel { Courses = courselister };
+
+            return View(viewModel);
+
+        }
+
+
+
+
+        public ActionResult ImportCoursesExisting()
+        {
+            GetExistingCourseDropdown();
+            return View();
+        }
+
+        public ActionResult ExistingCourseCreated()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ImportCoursesExisting(HttpPostedFileBase file)
+        {
+
+
+            //duplicate course protection. 
+            List<student> stufindah = new List<student>();
+            List<Course_Student> infocounter = new List<Course_Student>();
+
+            var courseid = Request.Form["hiddenInfo1"].AsInt();
+            var ct = db.courses.Where(a => a.CourseID.Equals(courseid)).FirstOrDefault().CourseTitle; //get existing title
+            var cc = db.courses.Where(a => a.CourseID.Equals(courseid)).FirstOrDefault().CourseCode; //using selected courseID, get the course code
+            var cy = (int?)Convert.ToInt32(Request.Form["courseYear"]); //request the course year from the form
+            var cterm = Request.Form["hiddenInfo2"]; //get the course term here
+            if (ModelState.IsValid)
+            {
+
+                var theCourse = new course
+                {
+                    CourseID = default,
+                    CourseCode = cc,
+                    CourseTitle = ct,
+                    CourseYear = cy,
+                    CourseTerm = cterm
+                };
+
+
+
+
+
+
+                db.courses.AddOrUpdate(theCourse);
+                db.SaveChanges();
+
+
+                Session["CreatedCourseTitle"] = theCourse.CourseTitle;
+                Session["CreatedCourseCode"] = theCourse.CourseCode;
+                Session["CreatedCourseYear"] = theCourse.CourseYear;
+                Session["CreatedCourseTerm"] = theCourse.CourseTerm;
+
+                var thingid = theCourse.CourseID;
+                Debug.WriteLine(thingid);
+
+                var profidStorage = Convert.ToInt32(Session["ProfID"]);
+
+                var theProfDec = new Professor_Course
+                {
+                    SectionID = default,
+                    ProfID = profidStorage,
+                    CourseID = thingid
+
+                };
+
+                db.Professor_Course.AddOrUpdate(theProfDec);
+                db.SaveChanges();
+
+                //storing the courseid of the created course in a local variable for future use 
+
+
+
+
+
+                /**module attempting to scrape  information for course */
+                /** basically two separate parts. The one above is formally creating the course object.
+                 * The below one takes the supplied csv and creates course_student objects based on the assumption
+                 * that the students have accounts */
+
+
+
+                /* check to see if the course w/ identical exists before POSTing entry */
+
+                if (file.ContentLength > 0 && file != null)
+                {
+                    try
+                    {
+
+
+                        string name = Path.GetFileName(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Uploads"), name);
+                        file.SaveAs(path);
+
+
+                        ViewBag.Message = "File Uploaded Successfully!";
+
+                        var lineNumber = 0;
+                        using (StreamReader reader = new StreamReader(@path))
+                        {
+                            while (!reader.EndOfStream)
+                            {
+                                var line1 = reader.ReadLine();
+
+                                if (lineNumber != 0)
+                                {
+                                    var vals = line1.Split(',');
+
+
+                                    var thing1 = vals[0];
+                                    var thing2 = vals[1];
+
+                                    //search the db table to find students with identical first and last names
+                                    var stinky = db.students.Where(a => a.StudentFirstName.Equals(thing2) && a.StudentLastName.Equals(thing1)).FirstOrDefault();
+
+                                    //add student object to local list 
+                                    stufindah.Add(stinky);
+                                }
+                                lineNumber++;
+
+
+                            }
+
+                            if (reader.EndOfStream)
+                            {
+                                foreach (var foundstu in stufindah)
+                                {
+                                    var newStu = new Course_Student
+                                    {
+                                        EnrollmentID = default,
+                                        CourseID = thingid,
+                                        StudentID = foundstu.StudentID,
+                                        DashAssigned = false
+
+                                    };
+
+                                    db.Entry(newStu).State = System.Data.Entity.EntityState.Modified;
+
+
+                                    infocounter.Add(newStu);
+                                    db.Course_Student.AddOrUpdate(newStu);
+
+
+
+
+
+
+
+                                }
+                                db.SaveChanges();
+
+
+                            }
+
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "Double check your inputs.";
+                    }
+
+
+                    List<student> names = new List<student>();
+                    foreach (var stuinfo in infocounter)
+                    {
+                        var finder1 = db.students.Where(a => a.StudentID.Equals(stuinfo.StudentID)).FirstOrDefault();
+
+                        if (finder1 != null)
+                        {
+                            names.Add(finder1);
+                        }
+                    }
+
+
+                    HttpContext.Session["CreatedCourseStudents"] = names;
+                    Session["NumOfStudents"] = infocounter.Count.ToString();
+
+
+                    return RedirectToAction("courseCreated");
+                }
+
+
+
+
+
+
+
+
+
+            }
+            return View();
         }
 
     }

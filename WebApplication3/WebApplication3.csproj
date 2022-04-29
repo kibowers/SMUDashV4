@@ -471,7 +471,6 @@
     <Content Include="Views\Home\ProfLogin.cshtml" />
     <Content Include="Views\Home\ProfDashboard.cshtml" />
     <Content Include="Views\Home\PeerEval.cshtml" />
-    <Content Include="Views\Home\peerevalstudentList.cshtml" />
     <Content Include="Views\Home\TestView.cshtml" />
     <Content Include="Views\Course_Student\Create.cshtml" />
     <Content Include="Views\Course_Student\Delete.cshtml" />
@@ -492,6 +491,8 @@
     <Content Include="Views\Home\CreateStudentGroups.cshtml" />
     <Content Include="Views\Home\GroupCreated.cshtml" />
     <Content Include="Views\Home\TableauPages.cshtml" />
+    <Content Include="Views\Home\ImportCoursesExisting.cshtml" />
+    <Content Include="Views\Home\ExistingCourseCreated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,8 +4,14 @@
 }
 
 
+<!--
 
-@using (Html.BeginForm("ImportCourses", "Home", FormMethod.Post, new { id = "importcoursesForm", enctype = "multipart/form-data" }))
+Known bug: modal reappears after validation. 
+    
+-->
+
+
+@using (Html.BeginForm("ImportCourses", "Home", FormMethod.Post, new { id = "importcoursesForm", enctype = "multipart/form-data"}))
 {
     <fieldset>
     </fieldset>
@@ -89,8 +95,8 @@
 
         #rect2 {
             position: center;
-            width: 1050px;
-            height: 768px;
+            width: 1100px;
+            height: 900px;
             left: 244px;
             top: 194px;
             background: #DCBDA0;
@@ -117,8 +123,8 @@
 
         #instruct1 {
             position: absolute;
-            width: 470px;
-            height: 444px;
+            width: 500px;
+            height: 375px;
             left: 550px;
             top: 150px;
         }
@@ -127,14 +133,31 @@
 
     <html>
     <head>
+
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+              rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+              rel="stylesheet" />
+
+        <!-- MDB -->
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+
+
         <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\jquery-3.4.1.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
-        <script src="C:\Users\Kaleb\source\repos\WebApplication3\WebApplication3\Scripts\bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-        "
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-81J8R69BHH"></script>
         <script>
@@ -144,7 +167,83 @@
 
             gtag('config', 'G-81J8R69BHH');
         </script>
-        <title> Professor Homepage </title>
+        <title> Import New Course </title>
+
+
+
+        <script>
+
+            $(window).on('load', function () {
+
+                $('#myModal').modal({ backdrop: 'static', keyboard: false });
+                $("#course1").tooltip();
+                $("#course2").tooltip();
+                var e1 = document.getElementById("er1").value;
+                var e2 = document.getElementById("er2").value;
+                var e3 = document.getElementById("er3").value;
+                var e4 = document.getElementById("er4").value;
+
+                if (e1 == 1) {
+                    $('#myModal').modal('hide');
+
+
+                }
+                else {
+
+                    $('#myModal').modal('show');
+
+                }
+
+                if (e2 == 2) {
+
+                    $('#myModal').modal('hide');
+
+
+                }
+                else {
+
+                    $('#myModal').modal('show');
+                }
+                if (e3 == 3) {
+
+                    $('#myModal').modal('hide');
+
+
+                }
+                else {
+
+                    $('#myModal').modal('show');
+                }
+                if (e4 == 3) {
+
+                    $('#myModal').modal('hide');
+
+
+                }
+                else {
+
+                    $('#myModal').modal('show');
+                }
+            });
+
+
+
+            function existCourseForm() {
+                $('#myModal').modal('hide');
+
+
+            };
+
+            function newCourseForm() {
+                $('#myModal').modal('hide');
+                document.getElementById("container1").style.visibility = "visible";
+            }
+
+
+
+
+
+        </script>
 
 
 
@@ -183,8 +282,35 @@
         <br />
         <br />
         <br />
+
+        <div class="text-center">
+
+            <div id="myModal" class="modal center-block active" role="dialog" style="background: #151C55;">
+                <br />
+                <br />
+                <br />
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background-color: burlywood; font-style: normal; font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0.02em;">
+                        <div class="modal-header">
+                            <h4 class="modal-title" style="font-style: normal; font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0.02em;"><strong> Select Import Option </strong></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <p> Are you importing using an existing course or creating an entirely new course? </p>
+
+                                <input type="button" value="Existing Course" style="font-size: 16px; border: 1px solid #000000; box-sizing: border-box; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);" onclick="location.href='@Url.Action("ImportCoursesExisting", "Home")'" id="existCourse" />
+                                <input type="button" value="New Course" style="font-size: 16px; border: 1px solid #000000; box-sizing: border-box; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);" onclick="newCourseForm()" id=" newCourse" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
         <section class="h-100 gradient-form ">
-            <div class="container py-5 h-100">
+            <div class="container py-5 h-100" id="container1" style="visibility:hidden;">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-xl-10">
                         <div class="card rounded-3 text-black">
@@ -192,7 +318,7 @@
                                 <div class="col-lg-6">
                                     <div class="rect" id="rect2">
                                         <div class="card-body p-md-5 mx-md-4">
-                                            <form enctype="multipart/form-data" >
+                                            <form enctype="multipart/form-data">
                                                 @Html.AntiForgeryToken()
                                                 <div class="form-outline mb-4">
 
@@ -200,66 +326,120 @@
 
 
 
-                                                        <label id="thing1" style=""> Add a Course Name: </label>
+                                                        <label id="thing1" for="course1"> Add a Course Name: </label>
                                                         <br />
 
-                                                        @Html.TextBoxFor(a => a.CourseTitle, new { @type = "text", @class = "form-control", @id = "course1", @ariadescribedby = "courseMsg", @name = "course1", @placeholder = "Please enter a course title.", @style = "text-align:center; position: absolute; left: 50%; transform: translateX(-50%);" })
+
+
+                                                        @Html.TextBoxFor(a => a.CourseTitle, new
+                                                        {
+                                                            @type = "text",
+
+                                                       @id = "course1",
+                                                       @ariadescribedby = "courseMsg",
+                                                       @name = "course1",
+                                                       @placeholder = "Please enter a course title.",
+                                                       @style = "text-align:center; position: absolute;",
+                                                       @maxlength = "200",
+                                                       @pattern = "^[a-zA-Z_ ]{4,100}?$",
+                                                       @onclick = "$('.tooltip').remove();",
+                                                       @title = "Course names are a 4 to 100, character only input"
+                                                        })
+
+
+                                                        <script>$("#course1").tooltip();</script>
+
+
+                                                        <br />
+
                                                         <br />
                                                         @Html.ValidationMessageFor(a => a.CourseTitle)
                                                         @Html.Hidden("testvar1", "", new { @id = "testvar1", @name = "testvar1" })
                                                         <label class="errmsg" id="error1" style="padding-left: 20px; color:red;"></label>
+                                                        <input id="er1" value="0" style="visibility:hidden;" />
+
                                                         <br />
+
+
+                                                        <label id="thing2" for="course2"> Add a Course Code </label>
                                                         <br />
 
 
-                                                        <label id="thing2"> Add a Course Code </label>
-                                                        <br />
-
-                                                        @Html.TextBoxFor(a => a.CourseCode, new { @type = "text", @class = "form-control", @id = "course2", @ariadescribedby = "coursecodeMsg", @name = "course2", @placeholder = "Please enter a course code.", @style = "text-align:center; position: absolute; left: 50%; transform: translateX(-50%);" })
+                                                        @Html.TextBoxFor(a => a.CourseCode, new
+                                                        {
+                                                            @type = "text",
+                                                      
+                                                       @id = "course2",
+                                                       @ariadescribedby = "coursecodeMsg",
+                                                       @name = "course2",
+                                                       @placeholder = "Please enter a course code.",
+                                                       @pattern = "^([a-zA-Z]{3,4})+([+-]?)+(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*)(?:[eE]([+-]?\\d+))?$",
+                                                       @title = "Course codes should be three to four characters, followed by a dash -, followed by exactly four numbers.",
+                                                       @onclick = "$('.tooltip').remove();",
+                                                       @style = "text-align:center; position: absolute;",
+                                                       @maxlength = "9"
+                                                        })
                                                         <br />
                                                         @Html.ValidationMessageFor(a => a.CourseCode)
                                                         @Html.Hidden("testvar2", "", new { @id = "testvar2", @name = "testvar2" })
+                                                        <script>$("#course2").tooltip();</script>
+
                                                         <label class="errmsg" id="error2" style="padding-left: 20px; color:red;"></label>
+                                                        <input id="er2" value="0" style="visibility:hidden;" />
 
                                                         <!-- Html year selector via range: validation implemented so it only allows selections two years in advance-->
 
 
                                                         <br />
-                                                        <br />
+
                                                         <a href="~/Uploads/samplecsv.csv"><img src="https://i.imgur.com/xS5uWF0.png" id="instruct1" />  </a>
 
 
 
                                                         <label for="courseYear"> Select Course Year </label>
-                                                        <input name="courseYear" required type="range" id="courseYear" oninput="document.getElementById('l1').innerHTML = this.value" />
+                                                        <input name="courseYear"
+                                                               required
+                                                               onclick="$('.tooltip').remove();"
+                                                               type="range"
+                                                               id="courseYear"
+                                                               title="Please provide the year the created course will be offered."
+                                                               oninput="document.getElementById('l1').innerHTML = this.value" />
                                                         <!-- year auto update-->
                                                         <label id="l1" style="padding-left:20px"> </label>
                                                         <label class="errmsg" id="error3" style="padding-left: 20px; color:red;"></label>
-
+                                                        <input id="er3" value="0" style="visibility:hidden;" />
+                                                        <script>$("#courseYear").tooltip();</script>
                                                         <br />
 
 
                                                         <label for="cTerm" id="thing4"> Select Course Term </label>
                                                         <br />
 
-                                                        <select id="cTerm" required>
-                                                            <option> Select a course term. </option>
+                                                        <select id="cTerm" onclick="$('.tooltip').remove();" title="Please provide the year the created course will be offered." required>
+                                                            <option value="0"> Select a course term. </option>
                                                             <option value="1"> Term 1  </option>
                                                             <option value="2"> Term 2  </option>
                                                             <option value="3A"> Term 3A  </option>
                                                             <option value="3B"> Term 3B  </option>
                                                         </select>
-                                                        <input type="hidden" class="hiddenthing" id="hiddenInfo" name="hiddenInfo" />
+                                                        <input type="hidden" class="hiddenthing" value="" id="hiddenInfo" name="hiddenInfo" />
+                                                        <br />
                                                         <label class="errmsg" id="error4" style="padding-left: 20px; color:red;"></label>
-
+                                                        <input id="er4" value="0" style="visibility:hidden;" />
+                                                        <script>$("#cTerm").tooltip();</script>
                                                         <br />
-                                                        <br />
-
 
                                                         <label for="file"> Import Student List from CSV  </label>
 
 
-                                                        <input type="file" required id="file" name="file" accept=".csv" />
+                                                        <input type="file"
+                                                               required
+                                                               onclick="$('.tooltip').remove();"
+                                                               title="Please provide a .CSV file with the list of students within your course."
+                                                               id="file"
+                                                               name="file"
+                                                               accept=".csv" />
+                                                        <script>$("#file").tooltip();</script>
                                                         <!-- potential "All" issue? -->
                                                         <br />
                                                         <input type="submit" name="submit" id="createsubmit" value="Create New Course" style="position: center; width: 262px; height: 37px; left: 308px; top: 715px; font-style: normal; font-weight: 700; font-size: 20px; line-height: 29px; /* identical to box height */ text-align: center; background: #151C55; color: antiquewhite;" />
@@ -299,21 +479,20 @@
 
 
             //automatically set course year on load so as to futureproof application
-            $(window).on('load', function ()
-            {
-                        var currYear = new Date().getFullYear();
+            $(window).on('load', function () {
+                var currYear = new Date().getFullYear();
                 var nextYear = new Date().getFullYear() + 1;
                 var nextnextYear = new Date().getFullYear() + 2;
-                        var inputgrabber = document.getElementById('courseYear');
+                var inputgrabber = document.getElementById('courseYear');
                 inputgrabber.setAttribute("min", currYear);
-                inputgrabber.setAttribute("max", nextnextYear);
-                        inputgrabber.setAttribute("value", currYear);
+                inputgrabber.setAttribute("max", nextYear);
+                inputgrabber.setAttribute("value", currYear);
 
 
 
-                        inputgrabber.setAttribute("step", 1);
+                inputgrabber.setAttribute("step", 1);
 
-                             document.getElementById('l1').innerHTML = inputgrabber.value;
+                document.getElementById('l1').innerHTML = inputgrabber.value;
 
             });
 
@@ -333,59 +512,88 @@
                 $("#cTerm").prop('disabled', true);
             });
 
-            $("#importcoursesForm").on('submit', function (e) {
-                selectElement = document.getElementById("course1"); //getting course title
-                hiddenthing1 = selectElement.value;
+            $('#importcoursesForm').on('submit', function (e) {
+
+                var dataisValid = false;
+                selectElement = document.getElementById("course1").value.length; //getting course title
+                hiddenthing1 = selectElement;
                 $('#testvar1').val(hiddenthing1);
 
-                selectElement2 = document.getElementById("course2"); //getting course code
-                hiddenthing2 = selectElement2.value;
+                 selectElement2 = document.getElementById("course2").value.length; //getting course code
+                hiddenthing2 = selectElement2;
                 $('#testvar2').val(hiddenthing2);
 
-                selectElement3 = document.getElementById("courseYear");
-
-                if (selectElement != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    document.getElementByID('error1').innerHTML = "Please assess your course name input.";
-                    e.preventDefault();
-                }
+                selectElement4 = document.querySelector('#cTerm').getAttribute("disabled");
 
 
-                if (selectElement2 != null)
-                {
-                    return true;
+                if (selectElement > 0) {
+
+
+                    dataisValid = true;
                 }
-                else
-                {
-                    document.getElementById('error2').innerHTML = "Please assess your coursecode input.";
+                else {
+
                     e.preventDefault();
 
+
+                    document.getElementById('error1').innerHTML = "Please assess your course name input.";
+                    document.getElementById('er1').value = 1;
+
                 }
 
 
-                if (selectElement3 != null || 0)
-                {
-                    return true;
+                if (selectElement2 > 0) {
+                    
+
+                    dataisValid = true;
+
                 }
-                else
-                {
-                    document.getElementById('error3').innerHTML = "Please assess your course year input.";
+                else {
+
+
                     e.preventDefault();
 
+                    document.getElementById('error2').innerHTML = "Please assess your course code input.";
+                    document.getElementById('er2').value = 2;
+
+
+                }
+
+                if (selectElement4 != null) {
+
+                    dataisValid = true;
+
+
+                }
+                else {
+                    document.getElementById("hiddenInfo").value = "";
+
+                    e.preventDefault();
+
+
+                    document.getElementById('error4').innerHTML = "Please assess your course year input.";
+                    document.getElementById('er4').value = 4;
+
+                }
+
+
+                if (dataisValid == false) {
+
+                    alert("Errors are present in your course input submission.");
+
                 }
 
 
 
-                return false;
-                alert("Errors are present in your course input submission.");
+                return dataisValid;
 
 
 
-                
+
+
+
+
+
 
 
 

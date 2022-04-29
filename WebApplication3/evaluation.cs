@@ -11,7 +11,8 @@ namespace WebApplication3
     public partial class evaluation
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int EvalID { get; set; }
 
         public int? ScheduleID { get; set; }

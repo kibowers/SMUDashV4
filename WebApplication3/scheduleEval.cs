@@ -10,7 +10,7 @@ namespace WebApplication3
     public partial class scheduleEval
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ScheduleID { get; set; }
 
         public int? CourseID { get; set; }
