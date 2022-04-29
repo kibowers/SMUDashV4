@@ -481,19 +481,16 @@
 
 
 
+                document.getElementById("dropdowncontainer2").style.visibility = "visible";
+
+                $("#studentCourses").prop('disabled', true);
 
                 if (!$("#test").val())
                 {
+                    alert("You have either completed all evaluations for this course, or groups/evaluations have not been scheduled yet. Please select another course.")
+                    document.getElementById("dropdowncontainer2").style.visibility = "hidden";
 
-                    alert("All evaluations have been completed for this course or your groups have not been assigned. Please select another course.");
-
-                }
-                else {
-
-                    document.getElementById("dropdowncontainer2").style.visibility = "visible";
-
-                    $("#studentCourses").prop('disabled', true);
-
+                    $("#studentCourses").prop('disabled', false);
                 }
 
                 });
